@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ulewo.mapper.AttachmentDownloadMapper" >
+  <resultMap id="BaseResultMap" type="com.ulewo.po.model.AttachmentDownload" >
+    <id column="attachment_id" property="attachmentId" jdbcType="INTEGER" />
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <id column="user_name" property="userName" jdbcType="VARCHAR" />
+    <id column="user_icon" property="userIcon" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    attachment_id, user_id,user_name,user_icon
+  </sql>
+  <sql id="base_condition" >
+ 	  <where>
+	      <if test="null!=attachmentId" >
+	        	and  attachment_id = #{attachmentId,jdbcType=DECIMAL}
+	      </if>
+	      <if test="null!=userId" >
+                and  user_id = #{userId,jdbcType=DECIMAL}
+          </if>
+     </where>
+  </sql>
+  <insert id="insert" parameterType="com.ulewo.po.model.AttachmentDownload" >
+    insert ignore into ulewo_attachment_download (attachment_id,user_id,user_name,user_icon)
+    values (#{attachmentId,jdbcType=INTEGER},#{userId,jdbcType=INTEGER},#{userName,jdbcType=VARCHAR},#{userIcon,jdbcType=VARCHAR})
+  </insert>
+  
+  <select id="selectList" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from ulewo_attachment_download  <include refid="base_condition" />
+  </select>
+  
+  <select id="selectCount" resultType="java.lang.Integer">
+    select count(*) from ulewo_attachment_download <include refid="base_condition"/>
+  </select>
+  
+</mapper>

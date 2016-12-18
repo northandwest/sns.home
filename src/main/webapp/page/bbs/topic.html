@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<#include "../include/common.html">
+<title>讨论区   - 不错啊</title>
+<link rel="stylesheet" href="${absolutePath}/resource/css/bbs.css"/>
+<script src="${absolutePath}/resource/js/bbs.js"></script>
+</head>
+<body>
+<#include "../include/top.html">
+<div class="main">
+	<div class="left index">
+		<div class="category-list">
+		    <#list cateogries as category>
+		    	<div class="cate-item">
+			        <div class="p-cate"><a href="bbs/board/${category.categoryId?c}">${category.name}</a></div>
+			        <#assign children =category.children>
+			        <#if (children?size>0)>
+				        <div class="sub-cate">
+				            <#list children as child>
+				                <div class="sub-cate-item">
+				                	<div class='sub-cate-item-icon'><img src="/resource/images/defusericon/usericon1.png"/></div>
+				                	<div class='sub-cate-item-info'>
+				                		<div class="sub-cate-item-name"><a href="bbs/sub_board/${child.categoryId?c}">${child.name}</a></div>
+				                		<div class="sub-cate-item-count"><span class="topic-count">主题：${child.count!'0'}</span>  今日：<span <#if child.todayCount?? && (child.todayCount>0)>class="today"</#if>>${child.todayCount!'0'}</span></div>
+				                	</div>
+				                	<div class="clear"></div>
+				                </div>
+				            </#list>
+				            <div  class="clear"></div>
+				        </div>
+			        </#if>
+		        </div>
+		    </#list>
+    	</div>
+	</div>
+	<div class="right">
+		<div class="count-info">
+			<p><span class='day-count'>今日帖子：${today!'0'} </span><span>昨日帖子：${yesterdayCount!'0'}</span></p>
+			<p>总帖子：${count!'0'}</p>
+		</div>
+		<div class='post-btn'>
+			<a href="javascript:;" id="post-btn" class="btn"><i class="icon icon-post-topic"></i><span>我要发帖</span></a>
+		</div>
+		<div class="active-user">
+			<div class="active-user-tit">活跃用户(TOP20)</div>
+			<div class="active-user-con">
+				<ul>
+					<#list activeUsers as item>
+						<li>
+							<a href="${absolutePath}/user/${item.userId?c}">
+								<img src="${absolutePath}/upload/${item.userIcon!''}"/>
+								<span>${item.userName!''}</span>
+								<span class="post-count">发帖：${item.topicCount!"0"}</span>
+							</a>
+						</li>
+					</#list>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<#include "../include/footer.html">
+</body>
+</html>

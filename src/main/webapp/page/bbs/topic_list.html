@@ -1,0 +1,98 @@
+<#assign  p=JspTaglibs["/WEB-INF/tlds/pager.tld"]/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<title>讨论区   - 不错啊</title>
+<#include "../include/common.html">
+<link rel="stylesheet" href="${absolutePath}/resource/css/bbs.css"/>
+<script src="${absolutePath}/resource/js/bbs.js"></script>
+</head>
+<body>
+<#include "../include/top.html">
+<div class="main">
+	<#assign subCateogry="">
+	<#if category??>
+			<#assign subCateogry="&nbsp;&gt;&nbsp;<span>${category.name}</span>">
+	</#if>		
+	<div class="navigation"><a href="${absolutePath}/bbs">讨论区</a>&nbsp;&gt;&nbsp;<a href="${absolutePath}/bbs/board/${pCategory.categoryId}">${pCategory.name}</a>${subCateogry}</div>
+	<div class="board-info">
+		<div class="board-info-con">
+			<div class="cate-name">${pCategory.name}</div>
+			<div class="topic-count">帖子：${count?c!'0'} 今日：${todayCount?c!'0'}</div>
+			<div class="topic-desc">${pCategory.description!''}</div>
+			<a href="javascript:;" class="btn sub-new" id="post-btn">+&nbsp;&nbsp;发布新帖子</a>
+		</div>
+	</div>
+	<div class="topic-list-con">
+		<div class="cate-tag">
+			<#assign class="">
+			<#if categoryId??>
+				<#else>
+				<#assign class="class='active'">
+			</#if>
+			<a href="${absolutePath}/bbs/board/${pCategory.categoryId}" ${class}>全部</a>
+			<#assign class="">
+			<#list pCategory.children as item>
+				<#if categoryId??&&categoryId==item.categoryId>
+						<#assign class="class='active'">
+					<#else>
+						<#assign class="">
+				</#if>
+				<a href="${absolutePath}/bbs/sub_board/${item.categoryId}" ${class}>${item.name}</a>
+			</#list>
+		</div>
+		<div class="topic-item-list">
+			<div class="pager"><@p.pager url="" countTotalStr="${result.page.countTotal?c!'0'}" pageStr="${result.page.page?c!'1'}" pageTotalStr="${result.page.pageTotal?c!'1'}"></@p.pager></div>
+		   <#if (result.page.countTotal>0)>
+		       <#list result.list as item>
+	                <div class="topic-item">
+	                	<div class="user-icon"><a href="${absolutePath}/user/${item.userId}"><img src="${absolutePath}/upload/${item.userIcon!''}"/></a></div>
+	                	<div class="topic-item-info">
+	                		<div class="topic-item-title">
+	                		    <#if (item.grade>0)>
+	                		         <span class="ding">置顶</span>
+	                		    </#if>
+	                		    <#if (item.essence==1)>
+                                     <span class="jing">精华</span>
+                                </#if>
+                                <#if (item.topicType??&&item.topicType.getType()==1)>
+                                     <span class="vote">投票</span>
+                                </#if>
+	                			<a href="${absolutePath}/bbs/${item.topicId?c}" class="title">${item.title}</a>
+	                			<span class="time">${item.showCreateTime!''}</span>
+	                			<a class="topic-cate-tag" href="${absolutePath}/bbs/sub_board/${item.categoryId}">${item.categoryName}</a>
+	                		</div>
+	                		<div class="topic-item-summary">${item.summary!''}</div>
+	                		<#if item.topicImageThumArray??>
+		                		<div class="image-thum topic-item-images">
+		                			<#list item.topicImageThumArray as img>
+		                				<a href="javascript:;" class="img"><img src="${absolutePath}/upload/${img}"></a>
+		                				<#if (img_index>=2)>
+		                					<#break>
+		                				</#if>
+		                			</#list>
+		                			<div class="clear"></div>
+		                		</div>
+	                		</#if>
+	                		<div class="topic-count-info">
+	                			<a href="${absolutePath}/user/${item.userId!''}" class="user-info"><i class="icon icon-user-name"></i><span>${item.userName!''}</span></a>
+	                			<span class="count"><i class="icon icon-read"></i><span>阅读：${item.readCount!'0'}</span></span>
+	                			<span class="count"><i class="icon icon-comment"></i><span>评论：${item.commentCount!'0'}</span></span>
+	                			<span class="count"><i class="icon icon-like"></i><span>喜欢：${item.likeCount!'0'}</span></span>
+	                			<span class="count"><i class="icon icon-collection"></i><span>收藏：${item.collectionCount!'0'}</span></span>
+	                		</div>
+	                	</div>
+	                	<div class="clear"></div>
+	                 </div>   
+	           </#list>
+	           <#else>
+	           <div class="no-data">没有帖子，赶紧抢沙发吧</div>
+		   </#if>
+		   	<div class="pager"><@p.pager url="" countTotalStr="${result.page.countTotal?c!'0'}" pageStr="${result.page.page?c!'1'}" pageTotalStr="${result.page.pageTotal?c!'1'}"></@p.pager></div>
+		</div>
+	</div>
+</div>
+<#include "../include/footer.html">
+</body>
+</html>

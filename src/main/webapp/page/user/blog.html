@@ -1,0 +1,85 @@
+<#assign  p=JspTaglibs["/WEB-INF/tlds/pager.tld"]/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<title>${user.userName!''}的博客 - 不错啊</title>
+<#include "../include/common.html">
+<script type="text/javascript">
+ulewo.usercenter={
+	userId:${user.userId}
+}
+</script>
+<link rel="stylesheet" href="${absolutePath}/resource/css/user.usercenter.css?version20151212"/>
+</head>
+<body>
+<#include "../include/top.html">
+<div class="main">
+	<div class="user-center-bg">
+		<img src="${absolutePath}/resource/images/${user.userBg!'defbg/bg3.jpg'}"></img>
+		<div class="user-home-icon"><img src="${absolutePath}/upload/${user.userIcon}"></div>
+	</div>
+	<div class="main-home">
+		<div class="left">
+			<#include "blog_left.html">
+		</div>
+		<div class="right">
+			<div class="user-home-tag">
+				<ul class="tag"  id="tag">
+					<li type="spitslot"><a href="${absolutePath}/user/${user.userId}#spitslot">吐槽</a></li>
+			<!-- 		<li type="topic"><a href="${absolutePath}/user/${user.userId}#topic" >讨论</a></li>
+					<li type="ask"><a href="${absolutePath}/user/${user.userId}#ask">问答</a></li> -->
+					<li type="knowledge"><a href="${absolutePath}/user/${user.userId}#knowledge">文章</a></li>
+					<li class="active" type="blog"><a href="${absolutePath}/user/${user.userId}#blog">博客</a></li>
+					<li type="fans"><a href="${absolutePath}/user/${user.userId}#fans">Ta的粉丝</a></li>
+					<li type="focus"><a href="${absolutePath}/user/${user.userId}#focus">Ta关注的人</a></li>
+				</ul>
+			</div>
+			<div class="topic-item-list">
+				<div class="pager">
+					<@p.pager url="" countTotalStr="${result.page.countTotal?c!'0'}" pageStr="${result.page.page?c!'1'}" pageTotalStr="${result.page.pageTotal?c!'1'}"></@p.pager>
+				</div>
+			   <#if (result.page.countTotal>0)>
+			       <#list result.list as item>
+		                <div class="topic-item">
+		                	<div class="topic-item-info">
+		                		<div class="topic-item-title">
+		                			<a href="${absolutePath}/user/${user.userId}/blog/${item.blogId?c}" class="title">${item.title!''}</a>
+		                			<span class="time">${item.showCreateTime!''}</span>
+		                			<a class="topic-cate-tag" href="${absolutePath}/user/${user.userId}/blog?categoryId=${item.categoryId!'0'}">${item.categoryName!'全部分类'}</a>
+		                		</div>
+		                		<div class="topic-item-summary">${item.summary!''}</div>
+		                		<#if item.topicImageThumArray??>
+			                		<div class="image-thum topic-item-images">
+			                			<#list item.topicImageThumArray as img>
+			                				<a href="javascript:;" class="img"><img src="${absolutePath}/upload/${img}"></a>
+			                				<#if (img_index>=2)>
+			                					<#break>
+			                				</#if>
+			                			</#list>
+			                			<div class="clear"></div>
+			                		</div>
+		                		</#if>
+		                		<div class="topic-count-info">
+		                			<span class="count"><i class="icon icon-read"></i><span>阅读：${item.readCount!'0'}</span></span>
+		                			<span class="count"><i class="icon icon-comment"></i><span>评论：${item.commentCount!'0'}</span></span>
+		                			<span class="count"><i class="icon icon-like"></i><span>喜欢：${item.likeCount!'0'}</span></span>
+		                			<span class="count"><i class="icon icon-collection"></i><span>收藏：${item.collectionCount!'0'}</span></span>
+		                		</div>
+		                	</div>
+		                 </div>
+		           </#list>
+		           <#else>
+		           <div class="no-data">没有博文</div>
+			   </#if>
+			   <div class="pager">
+					<@p.pager url="" countTotalStr="${result.page.countTotal?c!'0'}" pageStr="${result.page.page?c!'1'}" pageTotalStr="${result.page.pageTotal?c!'1'}"></@p.pager>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<#include "../include/footer.html">
+</body>
+</html>

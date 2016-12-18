@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<#include "../include/common.html">
+<title>${topic.title!''} - 不错啊</title>
+<link rel="stylesheet" href="../resource/css/bbs.css"/>
+<script type="text/javascript">
+ulewo.topicId = "${topic.topicId?c}";
+ulewo.topicType="T";
+ulewo.topicTitle = "${topic.title!''}";
+ulewo.editorWidth = 1040
+</script>
+<script type="text/javascript" src="${absolutePath}/resource/js/bbs.detail.js"></script>
+<script type="text/javascript" src="${absolutePath}/resource/js/attachment.js?version=20151208"></script>
+</head>
+<body>
+<#include "../include/top.html">
+<div class="main">
+	<div class="navigation">
+		<a href="${absolutePath}/bbs">讨论区</a>&nbsp;&gt;&nbsp;
+		<a href="${absolutePath}/bbs/board/${topic.pCategoryId}">${topic.pCategoryName!''}</a>&nbsp;&gt;&nbsp;
+		<a href="${absolutePath}/bbs/sub_board/${topic.categoryId}">${topic.categoryName!''}</a>&nbsp;&gt;&nbsp;
+		<span>${topic.title}</span>
+	</div>
+	<div class="topic-main-con">
+		<div class="topic-main">
+			<div class="topic-info-con">
+				<div class="topic-icon"><a href=""><img src="${absolutePath}/upload/${topic.userIcon!''}"/></a></div>
+				<div class="topic-info">
+					<div class="topic-title">
+						<a href="${absolutePath}/bbs/${topic.topicId?c}" class="title">${topic.title!''}</a>
+						<span class="time">${topic.showCreateTime!''}</span>
+			            <a class="topic-cate-tag" href="${absolutePath}/bbs/sub_board/${topic.categoryId}">${topic.categoryName!''}</a>
+					</div>
+					<div class="topic-info-d topic-count-info">
+						<a href="${absolutePath}/user/${topic.userId!''}" class="user-info"><i class="icon icon-user-name"></i><span>${topic.userName!''}</span></a>
+		       			<span class="count"><i class="icon icon-read"></i><span>阅读：${topic.readCount!'0'}</span></span>
+		       			<span class="count"><i class="icon icon-comment"></i><span>评论：<span id="comment-count">${topic.commentCount!'0'}</span></span></span>
+		       			<span class="count"><i class="icon icon-like"></i><span>喜欢：<span id="like-count">${topic.likeCount!'0'}</span></span></span>
+		       			<span class="count"><i class="icon icon-collection"></i><span>收藏：<span id="collection-count">${topic.collectionCount!'0'}</span></span></span>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="vote-con" class="vote-con"></div>
+			<div class="topic-detail">
+				${topic.content!''}
+			</div>
+			<#if topic.file??>
+				<div class="attachment">
+					<div class="attachment-title">附件</div>
+					<div class="attachment-info">
+						<span class="filename"><i class="icon icon-package"></i>${topic.file.fileName!''}</span>&nbsp;&nbsp;
+				        <span class="mark">所需积分：${topic.file.downloadMark!''}</span>&nbsp;&nbsp;
+				        <span class="dccount">下载：<a href="javascript:void(0)" attachmentid="${topic.file.attachmentId?c!''}" id="dcount">${topic.file.downloadCount!'0'}</a></span>&nbsp;&nbsp;
+				        <a href="javascript:void(0)" class="btn" name="144" topicid=${topic.topicId?c} attachmentid="${topic.file.attachmentId?c!''}"  id="downloadFile">点击下载</a>
+				        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				        <a href="${absolutePath}/get_mark" target="_blank">没有积分？</a>
+				        <div id="attachedUser" style="display: none;"></div>
+					</div>
+			       
+			    </div>
+			</#if>
+			<div class="like-users">
+				<#if (topic.likeUsers?size>0)>
+				<#list topic.likeUsers as like>
+					<a href="${absolutePath}/user/${like.userId}">${like.userName}</a>
+				</#list>
+				<span class="like-info">很喜欢这篇文章</span>
+			</#if>
+			</div>
+			<#include "../comment/comment.html">
+		</div>
+	</div>
+</div>
+<#include "../include/footer.html">
+</body>
+</html>

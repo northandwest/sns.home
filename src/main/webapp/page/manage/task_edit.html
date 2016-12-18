@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<#include "../include/common.html">
+<script language="javascript" type="text/javascript" src="${absolutePath}/resource/datepicker/WdatePicker.js"></script>
+<link rel="stylesheet" href="${absolutePath}/resource/css/manager.public.css"/>
+<script src="${absolutePath}/resource/js/manager.task.edit.js"></script>
+<title>定时任务管理</title>
+</head>
+<body>
+<#include "top.html">
+<div class="main">
+	<#include "left.html">
+	<div class="main-right">
+		<div class="navigation"><span>系统设置</span>&nbsp;&gt;&nbsp;<span>编辑定时任务</span></div>
+		<form action=""  id="task_form"> 
+		    <table class="table"> 
+		    	<input type="hidden" id="taskId" name="id" value="${(task.id?c)!''}">
+		     	<tr>
+		     		<td class="tit-right" width=90><em class="red">*</em>类名</td>
+		     		<td>
+		     			<input checkData="{rq:true,msg:'请输入正确类名'}" class="input l-length" maxlength="100"  type="text" name="taskClassz" value="${(task.taskClassz)!''}" <#if task??>readonly="readonly"</#if>>	
+		     		</td>
+		     	</tr>
+		     	<tr>
+		     		<td class="tit-right"><em class="red">*</em>方法名</td>
+		     		<td>
+		     			<input checkData="{rq:true,msg:'请输入方法名'}" class="input l-length" maxlength="100"  type="text" value="${(task.taskMethod)!''}" name="taskMethod" <#if task??>readonly="readonly"</#if>>	
+		     		</td>
+		     	</tr>
+		     	<tr>
+		     		<td class="tit-right"><em class="red">*</em>调度时间</td>
+		     		<td>
+		     			<input checkData="{rq:true,msg:'请输入调度时间'}" class="input l-length" maxlength="100"  type="text" value="${(task.taskTime)!''}" name="taskTime">
+		     			<a href="javascript:void(0)" id="settingTime">如何设置时间？</a>
+		     		</td>
+		     	</tr>
+		     	<tr>
+		     		<td class="tit-right">描述</td>
+		     		<td>
+		     			<input  class="input l-length" maxlength="150"  type="text" value="${(task.description)!''}" name="description">	
+		     		</td>
+		     	</tr>
+		     	<tr>
+		     		<td class="tit-right">是否立即执行</td>
+		     		<td class="tit-left">
+		     			<input type="checkbox" checked="checked" value="1" name="execution">
+		     		</td>
+		     	</tr>
+    			<tr> 
+		     		<td></td>
+		     		<td>
+		     			<a class="btn" href="javascript:;" id="save-btn">提交</a>
+		     			<a class="btn btn-large" href="javascript:history.back(-1)">返回</a>
+		     		</td>
+    			</tr>
+		    </table> 
+		 </form> 
+	</div>
+</div>
+<style>
+<!--
+.time-info-table{border-collapse: collapse;font-size: 12px;}
+.time-info-table td,.time-info-table th{border: 1px solid #DDDDDD;padding: 3px 15px 3px 5px;}
+.time-info-table td.colorTd{background:#F5F5F5}
+-->
+</style>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<#include "../include/common.html">
+<script language="javascript" type="text/javascript" src="${absolutePath}/resource/datepicker/WdatePicker.js"></script>
+<link rel="stylesheet" href="${absolutePath}/resource/css/admin.user.css"/>
+<title>修改个人资料</title>
+
+</head>
+<body>
+<#include "top.html">
+<div class="main">
+	<#include "left.html">
+	<div class="main-right">
+		<div class="navigation"><span>个人信息管理</span>&nbsp;&gt;&nbsp;<span>修改个人资料</span></div>
+		<form class="u-form" autocomplete="off" id="post-form" method="post">
+		    <div class="form-item">
+                <div class="item-tit">全站唯一ID：</div>
+                <div class="item-input">${user.userId!''}</div>
+                <div class="clear"></div>
+            </div>
+              <div class="form-item">
+                <div class="item-tit">邮箱：</div>
+                <div class="item-input">${user.email!''}</div>
+                <div class="clear"></div>
+            </div>
+            <div class="form-item">
+                <div class="item-tit">用户名：</div>
+                <div class="item-input">${user.userName!''}</div>
+                <div class="clear"></div>
+            </div>
+            <div class="form-item">
+                <div class="item-tit">性别：</div>
+                <div class="item-input">
+                    <label><input type="radio" name="sex" value="M"  <#if user.sex??&&user.sex=="M">checked="checked"</#if> />男</label>
+                    <label><input type="radio" name="sex" value="F" <#if user.sex??&&user.sex=="F">checked="checked"</#if> />女</label></div>
+                <div class="clear"></div>
+            </div>
+			<div class="form-item">
+				<div class="item-tit">出生日期：</div>
+				<div class="item-input"><input maxlength="200" value="${(user.birthday)?string("yyyy-MM-dd")}" onClick="WdatePicker()" readonly="readonly" class="title-input" type="text" id="birthday2" name="birthday"></div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+                <div class="item-tit">居住地：</div>
+                <div class="item-input"><input maxlength="50" value="${(user.address)!''}" class="title-input" type="text" id="address" name="address" ></div>
+                <div class="clear"></div>
+            </div>
+            <div class="form-item">
+                <div class="item-tit">职业：</div>
+                <div class="item-input"><input maxlength="50" value="${(user.work)!''}" class="title-input" type="text" name="work" ></div>
+                <div class="clear"></div>
+            </div>
+            <div class="form-item">
+                <div class="item-tit">个性签名：</div>
+                <div class="item-input"><input maxlength="200" style="width:500px;" value="${(user.characters)!''}" class="title-input" type="text" name="characters"></div>
+                <div class="clear"></div>
+            </div>
+			<div class="form-item">
+				<div class="item-tit"></div>
+				<div class="item-input"><a href="javascript:void(0)" id="post-btn" class="btn">&nbsp;&nbsp;保存信息&nbsp;&nbsp;</a></div>
+				<div class="clear"></div>
+			</div>
+		</form>
+	</div>
+</div>
+<script src="${absolutePath}/resource/js/admin.user.update.js?version=12"></script>
+<script>
+Date.prototype.format = function(format) {
+    var date = {
+           "M+": this.getMonth() + 1,
+           "d+": this.getDate(),
+           "h+": this.getHours(),
+           "m+": this.getMinutes(),
+           "s+": this.getSeconds(),
+           "q+": Math.floor((this.getMonth() + 3) / 3),
+           "S+": this.getMilliseconds()
+    };
+    if (/(y+)/i.test(format)) {
+           format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
+    }
+    for (var k in date) {
+           if (new RegExp("(" + k + ")").test(format)) {
+                  format = format.replace(RegExp.$1, RegExp.$1.length == 1
+                         ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+           }
+    }
+    return format;
+}
+
+
+</script>
+</body>
+</html>

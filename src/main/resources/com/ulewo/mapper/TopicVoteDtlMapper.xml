@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ulewo.mapper.TopicVoteDtlMapper" >
+  <resultMap id="BaseResultMap" type="com.ulewo.po.model.TopicVoteDtl" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="vote_id" property="voteId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="base_column_list" >
+    id,vote_id,title,count
+  </sql>
+  <sql id="base_condition" >
+ 	 <where>
+ 	 	<if test="voteId!=null">
+ 	 		and vote_id = #{voteId}
+ 	 	</if>
+ 	 	<if test="id!=null">
+ 	 		and id = #{voteDtlId}
+ 	 	</if>
+ 	 </where>
+  </sql>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        select <include refid="base_column_list"/> from ulewo_topic_vote_dtl where vote_id = #{voteId}
+    </select>
+
+	<insert id="insertBatch" parameterType="com.ulewo.po.model.TopicVoteDtl" >
+	    insert into ulewo_topic_vote_dtl (vote_id, title)values 
+	    <foreach collection="dtlList" item="item" separator=",">
+	   	 (#{item.voteId,jdbcType=INTEGER}, #{item.title,jdbcType=VARCHAR})
+	    </foreach>
+	</insert>
+  
+     <update id="updateVoteCountBatch">
+        update ulewo_topic_vote_dtl set count = count+1 where id in(
+            <foreach collection="list" item="item" separator=",">
+                #{item}
+            </foreach>
+        )
+     </update>
+  
+</mapper>

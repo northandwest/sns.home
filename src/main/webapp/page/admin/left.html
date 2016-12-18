@@ -1,0 +1,58 @@
+<div class="left-menu">
+	<ul>
+		<li>
+			<span>个人信息管理</span>
+			<ul>
+				<li><a href="${absolutePath}/admin/update_user.action" class="menu-link">修改个人资料</a></li>
+				<li><a href="${absolutePath}/admin/change_pwd.action" class="menu-link">修改登录密码</a></li>
+				<li><a href="${absolutePath}/admin/change_user_icon.action" class="menu-link">修改头像</a></li>
+				<li><a href="${absolutePath}/admin/user_center_background.action" class="menu-link">修改主页背景</a></li>
+			</ul>
+		</li>
+		<li>
+			<span>博客管理</span>
+			<ul>
+				<li><a href="${absolutePath}/admin/blog_list.action" class="menu-link">我的博文</a></li>
+				<li><a href="${absolutePath}/admin/add_blog.action" class="menu-link">发表博客</a></li>
+				<li><a href="${absolutePath}/admin/blog_drafts_list.action" class="menu-link">博客草稿箱</a></li>
+				<li><a href="${absolutePath}/admin/blog_category.action" class="menu-link">博客分类管理</a></li>
+			</ul>
+		</li>
+		<li>
+			<span>消息管理</span>
+			<ul>
+				<li><a href="${absolutePath}/admin/message_list.action" class="menu-link">我的消息</a></li>
+			</ul>
+		</li>
+		<li>
+			<span>我的考题</span>
+			<ul>
+				<li><a href="${absolutePath}/admin/my_question.action" class="menu-link">我的考题</a></li>
+				<li><a href="${absolutePath}/admin/my_error.action" class="menu-link">错题库</a></li>
+			</ul>
+		</li>
+		<li>
+			<span>收藏管理</span>
+			<ul>
+				<li><a href="${absolutePath}/admin/collection_list.action?articleType=T" class="menu-link">收藏的帖子</a></li>
+				<li><a href="${absolutePath}/admin/collection_list.action?articleType=K" class="menu-link">收藏的知识库</a></li>
+				<li><a href="${absolutePath}/admin/collection_list.action?articleType=A" class="menu-link">收藏的问答</a></li>
+				<li><a href="${absolutePath}/admin/collection_list.action?articleType=B" class="menu-link">收藏的博文</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<script>
+$(function(){
+    var height = $(document).height()-30;
+	$(".left-menu").css({"height":height+"px"});
+	var a_link = $("a.menu-link");
+	for(var i=0,_len=a_link.length;i<_len;i++){
+	    var a = a_link.eq(i);
+	    if(ulewo.curUrl.indexOf(a.prop("href"))!=-1){
+			a.addClass("active");
+	    }
+	}
+});
+	
+</script>

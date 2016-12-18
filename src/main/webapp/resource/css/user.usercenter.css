@@ -1,0 +1,58 @@
+@IMPORT url("spitslot.item.css");
+.left{width: 200px;float: left;padding-top:40px;}
+.user-center-bg{position: relative;}
+.user-home-icon{position: absolute;top:30px;left:10px;}
+.user-home-icon img{width: 180px}
+.user-home-op-btn{text-align: center;margin-top: 5px;}
+.user-home-user-name{text-align: center;font-size: 16px;font-weight: bold;}
+.user-home-info-item{margin-top: 10px;}
+.user-home-info-tit{display: inline-block;width:60px;text-align: right;font-weight: bold;}
+.user-home-friend{border-top: 1px solid #DCDDDE;border-bottom: 1px solid #DCDDDE;margin-top: 5px;text-align: center;padding: 10px 0px}
+.user-home-friend span{color: #32BE77;padding-right: 4px;display: inline-block;}
+.right{width:880px;float: right }
+.user-home-tag{margin-top: 10px;}
+ul.tag li a{padding: 10px 30px;}
+
+/********列表********/
+.topic-item {border-bottom: 1px dashed #D5D5D5;margin:10px 0px;padding: 5px 0px 10px 0px;}
+.topic-item .topic-item-title span.ding{background: #66A3FF;color: #fff;display: inline-block;padding: 2px 5px;border-radius: 5px;font-size: 12px;margin-right: 5px;}
+.topic-item .topic-item-title span.jing{background: #FF6666;color: #fff;display: inline-block;padding: 2px 5px;border-radius: 5px;font-size: 12px;margin-right: 5px;}
+.topic-item .topic-item-title span.vote{background: #55D45D;color: #fff;display: inline-block;padding: 2px 5px;border-radius: 5px;font-size: 12px;margin-right: 5px;}
+
+.topic-item .topic-item-title a.title{color:#336a9a;font-size: 16px;text-decoration: none;}
+.topic-item .topic-item-title span.time{color: #aaaaaa;font-size: 12px;margin-left: 20px;}
+.topic-item .topic-item-title a.topic-cate-tag{color: #aaaaaa;font-size: 12px;background: #ebedef;text-decoration: none;display: inline-block;padding:3px 10px;margin-left: 10px;}
+.topic-item .topic-item-summary{font-size: 12px;color: #5f5f5f;margin-top: 10px;}
+.topic-item .topic-item-images{margin: 10px 10px 10px 0px;}
+.topic-count-info{margin-top: 10px;}
+.topic-count-info a{font-size: 12px;text-decoration: none;}
+.topic-count-info span.count{display: inline-block;margin-right: 10px;color: #5f5f5f;}
+.topic-count-info span{font-size: 12px;}
+
+/***********详情************/
+.topic-info-con{border-bottom: 1px solid #CCC;padding:15px 0px;}
+.topic-title{color: #336A9A;font-size: 16px;text-decoration: none;}
+.topic-title span.time{color: #aaaaaa;font-size: 12px;margin-left: 20px}
+.like-users{margin-top: 10px;}
+.like-users a{display: inline-block;margin-right:5px;}
+
+/******附件******/
+.attachment-title{padding: 13px 10px 12px 10px;color: #fff;font-size:18px;background: #4590CE;float: left;width: 50px;text-align: center;}
+.attachment-info{border: 1px solid #CCCDCC;margin-left: 50px;padding: 10px}
+.attachment-info a.btn{padding: 5px 10px;}
+.attachment-info{color: #5f5f5f}
+.attachment-info span.filename{color: #336A9A;padding-left: 20px;}
+
+/*******粉丝，关注**********/
+.user-con-s-f ul li{list-style: none;float: left;width: 140px;text-align: center;margin-top:10px;}
+.user-con-s-f ul li a{display: inline-block;width: 140px;padding:10px 0px;text-decoration: none;color: #5D7895}
+.user-con-s-f ul li a:hover{background: #D9EBF4}
+.user-con-s-f ul li a img{width: 80px;height:80px;border-radius:40px;}
+.user-con-s-f ul li a span{margin-top: 10px;display: block;}
+
+/*****博客分类******/
+.blog-tit{padding: 10px 10px 5px 10px;border-bottom: 1px solid #DCDDDE;font-size: 16px}
+.blog-category ul li{list-style: none;}
+.blog-category ul li a{display: inline-block;margin-top: 5px;margin-right: 10px;padding:2px 8px 5px 8px;}
+.blog-category ul li a:hover,.blog-category ul li a.active{color:#10AF88}
+.blog-category ul li a span.blog-count{color: #10AF88}

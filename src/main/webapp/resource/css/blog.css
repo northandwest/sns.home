@@ -1,0 +1,30 @@
+/*************博客列表***********/
+.topic-list-con{background: #F3F3F3;margin-top: 20px;padding: 10px 20px;}
+.topic-list-con .topic-item-list{background: #fff}
+.topic-item-list .pager{height: 40px;}
+.topic-item-list ul.pagination{float: right;}
+.topic-list-con .cate-tag a{display: inline-block;color: #5f5f5f;text-decoration: none;text-align: center;padding: 5px 20px;font-size: 14px}
+.topic-list-con .cate-tag a.active,.topic-list-con .cate-tag a:hover{background: #fff;color: #336a9a}
+
+.topic-item-list .topic-item {padding: 10px;border-bottom: 1px dashed #D5D5D5;margin:10px;}
+.topic-item-list .topic-item .user-icon{float: left;width: 60px;}
+.topic-item-list .topic-item .user-icon img{width: 60px;border-radius: 30px}
+.topic-item-list .topic-item .topic-item-info{float: left;margin-left:20px;width:940px;}
+
+.topic-item-list .topic-item .topic-item-title span.ding{background: #66A3FF;color: #fff;display: inline-block;padding: 2px 5px;border-radius: 5px;font-size: 12px;}
+.topic-item-list .topic-item .topic-item-title span.jing{background: #FF6666;color: #fff;display: inline-block;padding: 2px 5px;border-radius: 5px;font-size: 12px;}
+.topic-item-list .topic-item .topic-item-title span.vote{background: #55D45D;color: #fff;display: inline-block;padding: 2px 5px;border-radius: 5px;font-size: 12px;}
+
+.topic-item-list .topic-item .topic-item-title a.title{color:#336a9a;font-size: 16px;text-decoration: none;}
+.topic-item-list .topic-item .topic-item-title span.time{color: #aaaaaa;font-size: 12px;margin-left: 20px;}
+.topic-item-list .topic-item .topic-item-title a.topic-cate-tag{color: #aaaaaa;font-size: 12px;background: #ebedef;text-decoration: none;display: inline-block;padding:3px 10px;margin-left: 10px;}
+.topic-item-list .topic-item .topic-item-summary{font-size: 12px;color: #5f5f5f;margin-top: 10px;}
+.topic-item-list .topic-item .topic-item-images{margin: 10px 10px 10px 0px;}
+.topic-count-info{margin-top: 10px;}
+.topic-count-info a{font-size: 12px;text-decoration: none;}
+.topic-count-info span.count{display: inline-block;margin-left: 10px;color: #5f5f5f;}
+.topic-count-info span{font-size: 12px;}
+
+.like-users{margin-top: 10px;}
+.like-users a{text-decoration: none;display: inline-block;margin-right: 10px;}
+.like-users span.like-info{color:#5f5f5f}

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<#include "../include/common.html">
+<script type="text/javascript" src="${absolutePath}/resource/ueditor1_4_3/ueditor.config.js"></script>
+<script type="text/javascript" src="${absolutePath}/resource/ueditor1_4_3/ueditor.all.js"></script>
+<script type="text/javascript" charset="utf-8" src="${absolutePath}/resource/ueditor1_4_3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="${absolutePath}/resource/ueditor1_4_3/myActionUrl.js"></script>
+<script language="javascript" type="text/javascript" src="${absolutePath}/resource/datepicker/WdatePicker.js"></script>
+<script type="text/javascript" src="${absolutePath}/resource/webuploader/webuploader.min.js?version=3.1"></script>
+<link rel="stylesheet" type="text/css" href="${absolutePath}/resource/webuploader/webuploader.css?version=3.1"/>
+<link rel="stylesheet" href="${absolutePath}/resource/css/admin.blog.css"/>
+<script src="${absolutePath}/resource/js/admin.blog.drafts.list.js?version=201506"></script>
+<title>博客草稿箱</title>
+</head>
+<body>
+<#include "top.html">
+<div class="main">
+	<#include "left.html">
+	<div class="main-right">
+		<div class="navigation"><span>博客管理</span>&nbsp;&gt;&nbsp;<span>博客草稿箱</span></div>
+		<div class="search">
+		    <form id="searchform" onsubmit="return false">
+			  <table class="table">
+			    <tbody>
+				  <tr>
+				  	<td class="tit-left">标题</td>
+					<td><input type="text" class="input" name="title" placeholder="标题支持模糊搜索"></td>
+			        <td class="tit-left">创建时间</td>
+			        <td class="tit">
+						<input class="input input-small" onclick="WdatePicker()" type="text" name="startTime" value="" readonly="readonly">&nbsp;-&nbsp;
+						<input class="input input-small" onclick="WdatePicker()" type="text" name="endTime" value="" readonly="readonly">
+					</td>
+			        <td class="tit"><a href="javascript:search()" class="btn">查询</a></td>
+			      </tr>
+			  </tbody>
+			  </table>
+			</form>
+		</div>
+		<div class="grid-list">
+			<table class="table table-list hover">
+				<thead>
+					<th>标题</th>
+					<th width="200">创建时间</th>
+					<th width="50">操作</th>
+				</thead>
+				<tbody id="data-list">
+					
+				</tbody>
+			</table>
+			<div id="pager">
+				
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

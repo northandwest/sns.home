@@ -1,0 +1,118 @@
+<script src="${absolutePath}/resource/js/comment.js?version=20151206"></script>
+<link rel="stylesheet" href="${absolutePath}/resource/css/comment.css">
+<style>
+div {
+    display: block;
+}
+ul, li {
+    padding: 0px;
+    margin: 0px;
+}
+.comment_class {
+    background: #fff;
+    padding: 20px 30px;
+}
+.commentform {     padding: 20px; background: #fff; }
+.panel_head {
+    border-bottom: 2px solid #ccc;
+    line-height: 30px;
+    margin-bottom: 15px;
+    position: relative;
+    font-size: 14px;
+}
+.comment_content {
+    min-width: 80%;
+    max-height: 120px;
+}
+.commentform ul {
+    clear: both;
+    margin: 0 20px 5px 20px;
+    /* overflow: hidden; */
+    font: normal 12px/24px Arial, Helvetica, sans-serif;
+}
+.commentform li {
+    margin: 0px;
+    list-style-type: none;
+}
+.commentform > ul {
+    margin: 0 0 0 29px;
+}
+.content_left{
+    float: left;
+    display: block;
+    width: 80px;
+}
+.content_right {
+    display: block;
+    margin-left: 90px;
+}
+
+.commentform textarea {
+    padding: 5px;
+    border: solid 1px #ddd;
+    color: #555;
+    font: normal 14px/24px Arial, Helvetica, sans-serif;
+}
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+
+.comment_btn {
+    margin: 5px 10px 10px 90px;
+    font-size: 14px;
+    padding: 5px 40px;
+}
+</style>
+
+
+
+
+
+<div class="comment_class">
+
+<!-- 	<div class="comment-editor-area">
+		<textarea id="comment-content" name="richContent" autocomplete="off"></textarea>
+	</div>
+	<div class="comment-btn-con">
+		<a href="javascript:;" class="btn" id="post-p-comment-btn">发表回复</a>
+	</div> -->
+	<#if Session["session_user_key"]??> <#else>
+	<div class="no-login-shade"></div>
+	<div class="login-panel">
+		你还未登录，请先<a href="javascript:ulewo.goLogin()">登录</a>&nbsp;&nbsp;或者，<a
+			href="javascript:ulewo.goRegister()">注册</a>
+	</div>
+	</#if>
+
+<div class="comment-title">
+	所有回复（<span id="comment-title-count">${(topic.commentCount)!''}</span>）
+</div>
+<div id="comment-list"></div>
+<div id="pager"></div>
+</div>
+<div style="height:10px;width:100%"></div>
+
+<div class="commentform">
+	<div class="panel_head">发表评论</div>
+	<ul>
+		<li class="content_left">用 户 名：</li>
+		<li class="content_right">ddrisme</li>
+	</ul>
+	<ul>
+		<li class="content_left">评论内容：</li>
+		<li class="content_right" style="position: relative;">
+		<textarea class="comment_content" name="comment_content" id="comment-content"	style="width: 400px; height: 200px;"></textarea></li>
+	</ul>
+	<ul>
+	<div class="comment-btn-con">
+		<a href="javascript:;" class="btn" id="post-p-comment-btn">发表回复</a>
+	</div>
+		<span id="tip_comment" style="color: red; display: none;">还能输入1000个字符</span>
+	</ul>
+</div>

@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="${absolutePath}/resource/css/comment.css"/>
+<link type="text/css" rel="stylesheet" href="${absolutePath}/resource/highlight/styles/monokai-sublime.css"/>
+<script type="text/javascript" src="${absolutePath}/resource/ueditor1_4_3/ueditor.config.js"></script>
+<script type="text/javascript" src="${absolutePath}/resource/ueditor1_4_3/ueditor.all.js"></script>
+<script type="text/javascript" charset="utf-8" src="${absolutePath}/resource/ueditor1_4_3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="${absolutePath}/resource/ueditor1_4_3/myActionUrl.js"></script>
+<script type="text/javascript" src="${absolutePath}/resource/highlight/highlight.pack.js"></script>
+<script src="${absolutePath}/resource/js/comment.js?version=20151206"></script>
+<div class="comment-area">
+    <div class="comment-editor-area">
+        <textarea id="comment-content" name="richContent" autocomplete="off" ></textarea>
+    </div>
+    <div class="comment-btn-con">
+    	 <a href="javascript:;" class="btn" id="post-p-comment-btn">发表回复</a>
+    </div>
+    <#if Session["session_user_key"]??>
+    	<#else>
+	    <div class="no-login-shade">
+	    </div>
+	    <div class="login-panel">
+	    		你还未登录，请先<a href="javascript:ulewo.goLogin()">登录</a>&nbsp;&nbsp;或者，<a href="javascript:ulewo.goRegister()">注册</a>
+	    </div>
+    </#if>
+</div>
+<div class="comment-title">
+	所有回复（<span id="comment-title-count">${(topic.commentCount)!''}</span>）
+</div>
+<div id="comment-list">
+
+</div>
+<div id="pager"></div>

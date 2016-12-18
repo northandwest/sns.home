@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="${absolutePath}/resource/css/ui-dialog.css"/>
+<link rel="stylesheet" href="${absolutePath}/resource/css/public.css?version=20151206"/>
+<link rel="shortcut icon" type="image/x-icon" href="${absolutePath}/resource/images/favicon.ico">
+<script src="${absolutePath}/resource/js/common/jquery-1.11.3.min.js"></script>
+<script src="${absolutePath}/resource/js/common/dialog.js"></script>
+<script type="text/javascript">
+var ulewo = {};
+ulewo.resultCode = {
+	"SUCCESS":200,
+	"LOGINTIMEOUT":401,
+	"NOPERMISSION":403,
+	"CODEERROR":425,
+	"MOREMAXLOGINCOUNT":405
+};
+ulewo.user = {
+	userId : "<#if Session["session_user_key"]??>${session_user_key.userId}</#if>",
+	userName : "<#if Session["session_user_key"]??>${session_user_key.userName}</#if>",
+	userIcon : "<#if Session["session_user_key"]??>${session_user_key.userIcon}</#if>"
+}
+ulewo.absolutePath = "${absolutePath}";
+ulewo.ucenterAbsolutePath = "http://ucenter.bucuoa.com";
+ulewo.curUrl = window.location.href;
+</script>
+<script src="${absolutePath}/resource/js/common/ulewo.js"></script>
+<script type="text/javascript">
+/**
+ * 查看图片
+ */
+$(document).on("click", ".image-thum a.img", function() {
+	ulewo.showImage($(this));
+});
+
+$(document).on("click", ".topic-detail img,.content_detail img", function() {
+    var imgsrc = $(this).attr("src");
+	window.open(imgsrc);
+});
+</script>

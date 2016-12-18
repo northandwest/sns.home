@@ -1,0 +1,83 @@
+<div class="left-menu">
+	<ul>
+		<li>
+			<span>网站统计</span>
+			<ul>
+				<li><a href="${absolutePath}/manage/index" class="menu-link">统计信息</a></li>
+			</ul>
+		</li>
+		<li>
+			<span>分类管理</span>
+			<ul>
+				<li><a href="${absolutePath}/manage/category" class="menu-link">分类管理</a></li>
+			</ul>
+		</li>
+		<li>
+			<span>吐槽管理</span>
+			<ul>
+				<li><a href="${absolutePath}/manage/spitsplot/spit_slot_list" class="menu-link">吐槽管理</a></li>
+				<li><a href="${absolutePath}/manage/spitsplot/spit_slot_comment_list" class="menu-link">吐槽评论管理</a></li>
+			</ul>
+		</li>
+		<li>
+			<span>在线考试管理</span>
+			<ul>
+				<li><a href="${absolutePath}/manage/exam/exam_list" class="menu-link">在线考试管理</a></li>
+			</ul>
+		</li>
+		<li>
+			<span>知识库管理</span>
+			<ul>
+				<li><a href="${absolutePath}/manage/knowledge/knowledge_list" class="menu-link">知识库管理</a></li>
+				<li><a href="${absolutePath}/manage/comment/comment_list?articleType=K" class="menu-link">评论管理</a></li>
+			</ul>
+		</li>
+		<li>
+			<span>讨论区管理</span>
+			<ul>
+				<li><a href="${absolutePath}/manage/topic/topic_list" class="menu-link">帖子管理</a></li>
+				<li><a href="${absolutePath}/manage/comment/comment_list?articleType=T" class="menu-link">评论管理</a></li>
+			</ul>
+		</li>
+		<li>
+			<span>问答管理</span>
+			<ul>
+				<li><a href="${absolutePath}/manage/ask/ask_list" class="menu-link">问答管理</a></li>
+				<li><a href="${absolutePath}/manage/comment/comment_list?articleType=A" class="menu-link">评论管理</a></li>
+			</ul>
+		</li>
+		<li>
+			<span>博客管理</span>
+			<ul>
+				<li><a href="${absolutePath}/manage/blog/blog_list" class="menu-link">博客管理</a></li>
+				<li><a href="${absolutePath}/manage/comment/comment_list?articleType=B" class="menu-link">评论管理</a></li>
+			</ul>
+		</li>
+		<li>
+			<span>用户管理</span>
+			<ul>
+				<li><a href="${absolutePath}/manage/user/user_list" class="menu-link">用户管理</a></li>
+			</ul>	
+		</li>
+		<li>
+			<span>系统设置</span>
+			<ul>
+				<li><a href="${absolutePath}/manage/task/task_list" class="menu-link">定时任务</a></li>
+			</ul>	
+		</li>
+	</ul>
+</div>
+<script>
+$(function(){
+    var height = $(document).height()-30;
+    $(".left-menu").css({"height":height+"px"});
+	var a_link = $("a.menu-link");
+	for(var i=0,_len=a_link.length;i<_len;i++){
+	    var a = a_link.eq(i);
+	    if(ulewo.curUrl.indexOf(a.prop("href"))!=-1){
+			a.addClass("active");
+	    }
+	}
+});
+	
+</script>

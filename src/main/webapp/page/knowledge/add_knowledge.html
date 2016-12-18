@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<title>知识库   - 不错啊</title>
+<#include "../include/common.html">
+<script type="text/javascript" src="${absolutePath}/resource/ueditor1_4_3/ueditor.config.js"></script>
+<script type="text/javascript" src="${absolutePath}/resource/ueditor1_4_3/ueditor.all.js"></script>
+<script type="text/javascript" charset="utf-8" src="${absolutePath}/resource/ueditor1_4_3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="${absolutePath}/resource/ueditor1_4_3/myActionUrl.js"></script>
+<script language="javascript" type="text/javascript" src="${absolutePath}/resource/datepicker/WdatePicker.js"></script>
+<script type="text/javascript" src="${absolutePath}/resource/webuploader/webuploader.min.js?version=3.1"></script>
+<link rel="stylesheet" type="text/css" href="${absolutePath}/resource/webuploader/webuploader.css?version=3.1"/>
+<link rel="stylesheet" href="../resource/css/knowledge.css"/>
+
+</head>
+<body>
+<#include "../include/top.html">
+<div class="main">
+	<form class="u-form" autocomplete="off" id="post-form">
+			<input name="richContent" id="richContent" type="hidden"/>
+			<div class="form-item">
+				<div class="item-tit"><em>*</em>标题：</div>
+				<div class="item-input"><input maxlength="150" class="title-input" type="text" name="title"  checkData="{rq:true,msg:'请输入标题'}" placeholder="请输入标题"></div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit"><em>*</em>分类：</div>
+				<div class="item-input">
+				    <span>
+					    <select name="pCategoryId" id="pCategoryId" checkData="{rq:true,msg:'请选择一级分类'}">
+	                        <option value="">请选择一级分类</option>
+	                    </select>
+				    </span>
+					<span>
+						<select name="categoryId" id="categoryId" checkData="{rq:true,msg:'请选择二级分类'}">
+	                        <option value="">请选择二级分类</option>
+	                    </select>
+					</span>
+                    
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				 <div class="item-tit"><em>*</em>内容：</div>
+				 <div class="item-input">
+					<textarea id="content" autocomplete="off" ></textarea>
+    			</div>
+    			<div class="clear"></div>
+			</div>
+			<input type="hidden" name="fileName" id="attached_file_name" />
+			<input type="hidden" name="fileUrl" id="attached_file" />
+			
+			<div class="form-item">
+				 <div class="item-tit">上传附件：</div>
+				 <div class="item-input">
+				 		<div class="file_upload" id="file_upload">
+							<div class="file-uploader">
+								<div id="filePicker">上传附件</div>
+								<div id="loading-upload"><img src="${absolutePath}/resource/images/loading.gif" noLazyload="true"></div>
+							</div>
+							<div class="file-info"><span class="info">大小不能超过2M，只能是.rar、.zip文件</span></div>
+							<div class="clear"></div>
+						</div>
+						<div id="file-list">
+							
+						</div>
+						<div class="file_upload_mark form-input-mark"><span>下载附件所需积分：</span><span><input type="text" checkData="{number:true,msg:'积分只能是数字'}" maxlength="5" name="downloadMark" id="mark" value="0"></span><a href="${absolutePath}/set_mark" target="_blank">为什么要设置积分?</a></div>
+    			</div>
+    			<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit"></div>
+				<div class="item-input"><a href="javascript:void(0)" id="post-btn" class="btn">&nbsp;&nbsp;提交知识&nbsp;&nbsp;</a></div>
+				<div class="clear"></div>
+			</div>
+		</form>
+</div>
+<script src="../resource/js/knowledge.add.js"></script>
+<#include "../include/footer.html">
+</body>
+</html>

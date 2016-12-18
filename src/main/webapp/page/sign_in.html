@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<title>签到   - 不错啊</title>
+<#include "include/common.html">
+<link rel="stylesheet" href="../resource/css/signin.css"/>
+<script src="../resource/js/signin.js?ver=1"></script>
+</head>
+<body>
+<#include "include/top.html">
+<div class="main">
+	<a class="sign-btn" href="javascript:;" id="doSignIn"  <#if signInInfo.haveSignInToday>haveSignInType=true<#else>haveSignInType=false</#if>>
+		<span class="week">
+			<span id="week-data">${signInInfo.week!''}</span>
+			<span id="day-data">${signInInfo.curDay!''}</span>
+		</span>
+		<span class="sign-info" id="sign-info">
+			<i class="icon icon-sigin"></i><span class="sign-tit"><#if signInInfo.haveSignInToday>已签到<#else>签&nbsp;到</#if></span>
+		</span>
+		<span class="sign-days">
+			<span id="sign-days">${signInInfo.userSignInCount!''}</span>
+			<span class="sign-days-day">Day</span>
+		</span>
+	</a>
+	<div class="today-signin-info">
+		<ul class="tag"  id="tag">
+			<li class="active"><a href="javascript:void(0)">今日签到(<span id="todaySigInCount">${signInInfo.todaySigInCount!''}</span>)</a></li>
+			<li><a href="javascript:void(0)">我的签到(<span id="userSignInCount">${signInInfo.userSignInCount!''}</span>)</a></li>
+		</ul>
+		<div class="tag-content">
+			<div id="curDaySigin"></div>
+			<div id="pager"></div>
+		</div>
+		<div class="tag-content" id="userSignIn"></div>
+	</div>
+</div>
+<#include "include/footer.html">
+</body>
+</html>

@@ -1,0 +1,38 @@
+.spit-item{margin-top: 20px;}
+.spit-item .spit-item-user-icon{float: left;width: 60px;}
+.spit-item .spit-item-user-icon img{border-radius:30px;width: 60px;}
+.spit-item .spit-item-body{border: 1px solid #DDDEDD;border-radius:5px;padding-bottom: 10px;margin-left: 75px}
+.spit-item .spit-item-body a{text-decoration: none;color: #5d7895;font-size: 12px;}
+.spit-item .spit-item-body a span{font-size: 12px;}
+.spit-item .spit-item-body-content{word-wrap: break-word;word-break: normal;padding: 10px;}
+.spit-item audio{margin:0px 0px 10px 10px;}
+
+.spit-item .spit-item-body-img img{max-width: 700px;cursor: url("../images/cur_zin.cur"), pointer;}
+.spit-item .spit-item-body-info{height: 20px;border: 1px solid #DDDEDD;border-left: none;border-right: none;padding:8px;}
+.spit-item .spit-item-body-info a{display: inline-block;float: left;margin-right: 15px;position: relative;}
+.spit-item .spit-item-body-info span{display: inline-block;}
+.spit-item .spit-item-body-info span.spit-create-time{display: inline-block;float: right;margin-right:10px;color: #9B9C9B;font-size: 12px;}
+/*******吐槽评论********/
+.spit-item-like-body{display:none;}
+.spit-item-like-body a{width: 30px;height: 30px;display: inline-block;margin-bottom: 10px;margin-right: 10px;}
+.spit-item-like-body a img{width: 30px;height: 30px;border-radius:15px;}
+.spit-item-comment-body,.spit-item-like-body{padding:10px 20px 0px 20px;border-bottom: 1px solid #DDDEDD;}
+.spit-item-comment-body .comment-item{border-bottom: 1px solid #EEEFEE;padding: 10px 0px;}
+.spit-item-comment-body .comment-user-icon{float: left;width:30px;}
+.spit-item-comment-body .comment-user-icon a img{width: 30px;height: 30px;border-radius:15px}
+.spit-item-comment-body .comment-main{margin-left: 40px;}
+.spit-item-comment-body .comment-content{word-wrap: break-word;word-break: normal;line-height:20px;}
+.spit-item-comment-body .comment-op{margin-top: 10px;}
+.spit-item-comment-body .comment-op span{color: #9B9C9B;font-size: 12px;}
+.spit-item-comment-body .comment-op a{margin-left: 10px;display: inline-block;}
+/******点赞，评论******/
+.spit-item .spit-item-body .like_comment{height: 30px;padding: 15px 15px 0px 15px;}
+.spit-item .spit-item-body .like_comment a{vertical-align: bottom;display: inline-block;margin-right: 20px;}
+.spit-item .spit-item-body .like_comment a span{display:inline-block;float: right;font-size: 16px;margin-top: -2px;margin-left:5px;}
+.spit-item .spit-item-body .like_comment a.show-detail{float: right;margin-top: 3px;}
+/*****评论表单******/
+.spit-item .spit-item-body .comment_form{padding:10px 20px;display: none;}
+.spit-item .spit-item-body .comment_form textarea{width:657px;height: 100px;border-radius:5px;padding:10px;}
+.comment_form_op{height: 30px;margin-top: 10px;}
+.comment_form_op a{margin-right: 10px;}
+.comment_form_op a.btn{float: right;margin-right: 0px;color: #fff;font-size: 16px;}

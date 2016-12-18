@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<title>在线考试   - 不错啊</title>
+<#include "../include/common.html">
+<link rel="stylesheet" href="../resource/css/exam.css"/>
+<script>
+	ulewo.categoryId="${categoryId!'0'}";
+</script>
+<script src="../resource/js/exam.dolearn.js"></script>
+</head>
+<body>
+<#include "../include/top.html">
+<div class="main">
+	<div id="exam-list"></div>
+	<div class="post-exam">
+		<a href="javascript:;" class="btn" id="post-exam">交卷啦</a>
+		<a href="${absolutePath}/exam/do_learn.action" class="btn">下一题</a>
+		<a href="${absolutePath}/exam" class="btn">退出学习</a>
+		
+	</div>
+	<div class="exam-info">
+		<div class="exam-time-info">
+			<i class="icon icon-time"></i>
+			<div class="time" id="use-time"><span id="time-m">00</span>:<span id="time-s">00</span></div>
+			<div class="exam-info-tit">
+				<span class="tit">第</span>
+				<span id="answer_num" class="num">0</span>
+				<span class="tit">题</span>
+			</div>
+			<div class="exam-info-tit">
+				<span class="tit">共</span>
+				<span id="total-num" class="num">0</span>
+				<span class="tit">题</span>
+			</div>
+			<div class="exam-info-tit">
+				<span class="tit">剩</span>
+				<span id="answer_left" class="num">0</span>
+				<span class="tit">题</span>
+			</div>
+		</div>
+		<div class="mark-con">
+			最后得分：<span id="mark">0</span>分
+		</div>
+	</div>
+</div>
+
+<#include "../include/footer.html">
+</body>
+</html>

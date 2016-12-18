@@ -1,0 +1,49 @@
+.main{position: relative;}
+form.u-form .item-tit { width: 100px;}
+form.u-form .item-input input {width:500px;}
+.item-input textarea{border: 1px solid #CCCCCC;width:700px;height:150px; padding:10px;overflow: auto;}
+.answer-item{margin-top: 10px;}
+.answer-item span.letter{display: inline-block;width:20px;}
+form.u-form .item-input input.not-input{width: auto;height:auto;vertical-align: middle;border: none;} 
+
+#post-user-list{padding-top: 5px;}
+#post-user-list a.exam-user{margin-top:10px;display: inline-block;width: 140px;height:115px;padding:15px 0px;text-decoration: none;color: #5D7895;text-align: center;}
+#post-user-list a:hover{background: #D9EBF4}
+#post-user-list a img{width: 80px;height:80px;border-radius:40px;}
+#post-user-list a span{margin-top: 10px;display: block;}
+#post-user-list a span.post-count{margin-top: 0px;display: block;font-size: 14px;color: #494949}
+
+.exam-op{height: 40px;}
+.exam-form{display: inline-block;}
+
+
+.exam_item{border-bottom: 1px dashed #ccc;position: relative;}
+.exam_item:hover{background-color: #F8F8F8}
+.exam_item label{cursor: pointer;}
+.item-num{padding: 5px;font-size: 16px;}
+.item-num span.item-num-no{color:#FF999A;font-size: 16px;font-weight: bold;padding: 0px 3px;}
+.item-num span.item-type{font-weight: bold;padding: 0px 5px;}
+.item-num span.item-user{font-size: 12px;color: #666;padding-left: 10px;}
+.item-answer{padding: 5px;}
+.item-answer label{display: inline-block;margin-right: 10px;margin-top: 5px;}
+.item-answer label span{padding-left:5px;}
+
+/********记时信息*********/
+.exam-info{position:fixed;top:200px;left:0px;}
+.exam-time-info{background: #4590CE none repeat scroll 0% 0%;display: inline-block;color: #FFF;border-radius: 5px;padding: 15px 15px 10px 15px;}
+.icon-time{ display: inline-block;  width: 32px; height: 32px; background-position: 0px -247px;float: left;}
+.exam-time-info .time{float: left;color:yellow;font-weight: bold;display: inline-block;margin-left: 10px;margin-top: 10px;}
+.exam-info-tit{float: left;width:40px;text-align: center;margin-top: -8px;}
+.exam-info-tit span.tit{display:block;}
+.exam-info-tit span.num{font-weight: bold;color: yellow}
+.mark-con{font-size: 14px;}
+#mark{font-weight: bold;color: red;font-style:italic;padding: 0px 5px;font-size: 20px;}
+.post-exam{margin-top: 20px;}
+.exam-error{width: 70px;height: 70px;display:inline-block;position: absolute;top: 0px;right: 0px;background-position: 0px -565px;}
+.exam-right{width: 70px;height: 70px;display:inline-block;position: absolute;top: 0px;right: 0px;background-position: 0px -490px;}
+
+/****正确答案*****/
+.right-answer {border: 1px solid red; padding: 5px; margin-bottom: 5px;}
+/********答案解析***********/
+.analyse {border: 1px solid green;padding: 5px;margin-bottom: 5px;}
+.analyse-tit {font-weight: bold;}

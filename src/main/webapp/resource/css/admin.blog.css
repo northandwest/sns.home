@@ -1,0 +1,12 @@
+@IMPORT url("admin.public.css");
+form.u-form .item-tit {width: 70px;}
+form.u-form .item-input input.title-input{width:750px;}
+form.u-form .vote-input input.title-input{width:400px;}
+/******上传*******/
+.webuploader-pick{padding:4px 5px;}
+.file_upload{height: 40px;}
+#filePicker{display: inline-block;}
+#file-list{padding: 5px;}
+#loading-upload{display: inline-block;width: 50px;display: none;}
+.file-uploader{display: inline-block;float: left;}
+.file-info{float: left;margin-top:8px;}

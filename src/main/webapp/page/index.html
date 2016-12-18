@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<title>不错啊 - 不错啊致力于java社区，追求技术至顶端！</title>
+<meta name="Keywords" content=" java 自学  初学  新手 编程  不错啊">
+<meta name="Description" content="不错啊 bucuoa 致力于java初学自学，为新手打造最优秀的学习平台">
+<#include "include/common.html">
+<link rel="stylesheet" href="${absolutePath}/resource/css/index.css?version=20151206"/>
+<script src="${absolutePath}/resource/js/home.js"></script>
+<link rel="stylesheet" type="text/css" href="http://static.bucuoa.com/css/base.css?v=201608" />
+<link rel="stylesheet" type="text/css" href="http://static.bucuoa.com/css/front.css?v=201608" />
+
+</head>
+<body>
+<#include "include/top.html">
+<div class="main">
+    <div class="left">
+    
+    	<!-- <div class="data-list">
+			<div class="part-title">
+				<a href="${absolutePath}/bbs" class="part" target="_blank">讨论区</a>
+			</div>
+			<#list topicList as topic>
+				<div class="data-item">
+					<a href="${absolutePath}/bbs/${topic.topicId}" target="_blank"  class="tit <#if topic.newPost>new</#if>">${topic.title}</a>
+					<span class="time">${topic.showCreateTime} By ${topic.userName}</span>
+					<div class="read">${topic.commentCount}评/${topic.readCount}阅</div>
+				</div>
+			</#list>
+		</div>
+		
+		<div class="data-list">
+			<div class="part-title">
+				<a href="${absolutePath}/ask" class="part" target="_blank">问答</a>
+			</div>
+			<#list askList as ask>
+				<div class="data-item">
+					<a href="${absolutePath}/ask/${ask.askId}" target="_blank"  class="tit <#if ask.newPost>new</#if>">${ask.title}</a>
+					<span class="time">${ask.showCreateTime} By ${ask.userName}</span>
+					<div class="read">${ask.commentCount}评/${ask.readCount}阅</div>
+				</div>
+			</#list>
+		</div> -->
+		
+		<div class="data-list">
+		<!-- 	<div class="part-title">
+				<a href="${absolutePath}/knowledge" class="part" target="_blank">文章</a>
+			</div> -->
+			<nav class="blue_bar">
+                <i style="display:none" class="new J_realtime" data-auto-times="0" data-auto="0"><span></span></i>
+                <ul id="all_news_nav">
+                    <li><a data-type="all" class="current">全部资讯</a></li>
+                   <li>|</li>
+        <!--              <li><a data-type="dig">人气推荐</a></li>
+                    <li>|</li>
+                    <li><a data-type="soft">软件版</a></li>
+                    <li>|</li>
+                    <li><a data-type="industry">业界版</a></li>
+                    <li>|</li>
+                    <li><a data-type="interact">互动版</a></li> -->
+                </ul>
+                <div class="show_type"></div>
+                <div class="fr" style="padding:0px 6px 0 0">今日更新文章 <em>103</em> 篇，网友评论 <em>1030</em> 条</div>
+            </nav>
+			
+			<div class="all_news_wildlist" id="all_news_list" current-type="all">
+                <div class="alllist" id="allnews_all" data-page="1" data-stop="0">
+                <#list knowledgeList as knowledge>
+			<div class="items_area">
+			<div class="item" id="J_allItem_534419">
+                            <div class="hd">
+                                <div class="title">
+                                    <a target="_blank" href="${absolutePath}/knowledge/${knowledge.topicId}">${knowledge.title}</a>
+                                    <div class="tj">
+                                        <span>${knowledge.userName} 发布于<em>${knowledge.showCreateTime}</em> | </span>
+                                        <span><em>${knowledge.commentCount}</em>评/${knowledge.readCount}阅</span>
+                                    </div>
+                                </div>
+                                <div class="picno"><div class="pic"><a target="_blank" href="/user/${knowledge.userId}">
+                                <img width="100" height="100" title="${knowledge.userName}" src="//static.bucuoa.com/upload/${knowledge.userIcon!'avatars/10720.jpg'}"></a></div></div><span class="newsinfo"><p>
+                                ${knowledge.summary!}
+                                <br></p></span>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="tools repeat">
+                                <div class="time"><!-- <a target="_blank" href="http://www.linuxprobe.com/"><b>《Linux就该这么学》 - Linux系统入门教材</b></a> --></div>
+                                <ul class="gray">
+                                    <li><b><a target="_blank" href="${absolutePath}/knowledge/${knowledge.topicId}">详细内容</a></b></li>
+                                    <li>已有<em>1</em>个意见&nbsp;&nbsp;|</li>
+                                    <li><em>0</em>次推荐&nbsp;&nbsp;|</li>
+                                    <li><em>0</em>次打分&nbsp;&nbsp;|</li>
+                                    <li>事件分:<em>0</em>分&nbsp;&nbsp;|</li>
+                                    <li>质量分:<em>0</em>分</li>
+                                </ul>
+                            </div>
+                        </div>
+                        </div>
+                        
+                        </#list>      
+                        
+                         </div>
+                        </div>
+                  
+		</div>
+    </div>
+    <div class="right">
+        <a class="sign-btn" href="javascript:;" id="doSignIn"  <#if signInInfo.haveSignInToday>haveSignInType=true<#else>haveSignInType=false</#if>>
+            <span class="week">
+                <span id="week-data">${signInInfo.week!''}</span>
+                <span id="day-data">${signInInfo.curDay!''}</span>
+            </span>
+            <span class="sign-info" id="sign-info">
+                <i class="icon icon-sigin"></i><span class="sign-tit"><#if signInInfo.haveSignInToday>已签到<#else>签&nbsp;到</#if></span>
+            </span>
+            <span class="sign-days">
+                <span id="sign-days">${signInInfo.userSignInCount!''}</span>
+                <span class="sign-days-day">Day</span>
+            </span>
+        </a>
+        <div class="index-today-count">
+        	今日签到：<a href="${absolutePath}/signIn" id="index_count">${signInInfo.todaySigInCount}</a>
+        </div>
+        
+        <div class="service">
+			<div id="weather"  class="about-part-con">
+				<div><img src="${absolutePath}/resource/images/loading.gif" noLazyload="true">正在加载天气信息</div>
+			</div>
+		</div>
+        <div class="part-title">
+				<a href="${absolutePath}/blog" class="part">最新博客</a>
+		</div>
+		<#list blogList as blog>
+			<div class="data-item">
+				<a href="${absolutePath}/user/${blog.userId}/blog/${blog.blogId}" target="_blank" class="blog-tit <#if blog.newPost>new</#if>">${blog.title}</a>
+				<span class="blog-time">
+					<span class="blog-time-name">by&nbsp;&nbsp;${blog.userName}</span>
+					<span class="blog-time-time">${blog.showCreateTime}</span>
+					<div class="clear"></div>
+				</span>
+			</div>
+		</#list>
+		
+	<!-- 	
+		<div class="part-title">
+			<a href="" class="part">常用工具</a>
+		</div>
+		<div class="home-tools">
+				<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">JDK下载</a>
+				<a href="http://dlsw.baidu.com/sw-search-sp/soft/ea/12585/mysql_installer_community_V5.6.21.1_setup.1418020972.msi" target="_blank">MySQL下载</a>
+				<a href="http://c1.cr173.com/xl/JDK_API_1_6_zh_CN.zip" target="_blank">JDK6中文文档</a>
+				<a href="http://pan.baidu.com/s/1kTyYOsf" target="_blank">Jquery中文文档</a>
+				<a href="http://mirrors.hustunique.com/eclipse/technology/epp/downloads/release/luna/SR1/eclipse-jee-luna-SR1-win32.zip" target="_blank">Eclipse(32位)</a>
+				<a href="http://mirrors.hustunique.com/eclipse/technology/epp/downloads/release/luna/SR1/eclipse-jee-luna-SR1-win32-x86_64.zip" target="_blank">Eclipse(64位)</a>
+		</div>
+		 -->
+    </div>
+    <div class="clear"></div>
+</div>
+<#include "include/footer.html">
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<#include "../include/common.html">
+<link rel="stylesheet" href="${absolutePath}/resource/css/admin.user.css"/>
+<title>修改背景图</title>
+</head>
+<body>
+<#include "top.html">
+<div class="main">
+    <#include "left.html">
+    <div class="main-right">
+        <div class="navigation"><span>个人信息管理</span>&nbsp;&gt;&nbsp;<span>修改主页背景</span></div>
+        <div id="system-icon">
+                                
+        </div>
+        <div class="save-btn">
+            <a href="javascript:;" class="btn" id="save-btn">保存</a>
+        </div>
+    </div>
+</div>
+<script>
+ulewo.background = "${background!''}";
+ulewo.bgImagePath ="http://static.bucuoa.com/bucuoa"
+</script>
+<script src="${absolutePath}/resource/js/admin.user.background.js"></script>
+</body>
+</html>

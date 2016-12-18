@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ulewo.mapper.ExamMapper" >
+  <resultMap id="result_map_exam" type="com.ulewo.po.model.Exam" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="exam_title" property="examTitle" jdbcType="VARCHAR" />
+    <result column="analyse" property="analyse" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="choose_type" property="chooseType" jdbcType="INTEGER" typeHandler="com.ulewo.po.handler.ChooseTypeHandler"/>
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_icon" property="userIcon" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" typeHandler="com.ulewo.po.handler.StatusEnumHandler"/>
+  	<collection column="id" property="examDetails" select="com.ulewo.mapper.ExamDetailMapper.selectList"/>
+  </resultMap>
+  
+  <sql id="base_condition">
+  		<where>
+  			<if test="examId!=null">
+    			and id = #{examId}
+    		</if>
+    		<if test="status!=null">
+    			and status = #{status.type}
+    		</if>
+    		<if test="categoryId!=null">
+    			and category_id = #{categoryId}
+    		</if>
+    		<if test="examIds!=null">
+    			and id in(<foreach collection="examIds" separator="," item="examId"> #{examId}</foreach>)
+    		</if>
+    		<if test="userName!=null and ''!=userName">
+    			and user_name like '%${userName}%'
+    		</if>
+    		<if test="null!=startTime and ''!=startTime">
+             <![CDATA[
+                and create_time >='${startTime} 00:00:00'
+             ]]>
+          	</if>
+          	<if test="null!=endTime and ''!=endTime">
+              <![CDATA[
+                and create_time <= '${endTime} 23:59:59'
+              ]]>
+          	</if>
+  		</where>
+  </sql>
+  
+  <sql id="base_column_exam" >
+   	 id,exam_title,
+   	 <if test="showAnalyse">
+   	  	analyse,
+   	 </if>
+   	 category_id,choose_type,user_id,user_name,user_icon,create_time,status
+  </sql>
+  
+  <select id="selectExamRand" resultMap="result_map_exam">
+  	SELECT <include refid="base_column_exam"/> from ulewo_exam <include refid="base_condition"/> 
+  	ORDER BY rand() LIMIT #{examMaxTitle}
+  </select>
+  
+   
+  <select id="selectList" resultMap="result_map_exam_right_answer">
+	select <include refid="base_column_exam"/> from ulewo_exam <include refid="base_condition"/> 
+	order by status asc,create_time desc
+	<if test="page!=null">
+		limit #{page.start},#{page.end}
+	</if>
+  </select>
+  
+    
+  <select id="selectCount" resultType="java.lang.Integer">
+  	select count(1) from ulewo_exam <include refid="base_condition"/> 
+  </select>
+  
+   <resultMap id="result_map_exam_right_answer" type="com.ulewo.po.model.Exam" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="exam_title" property="examTitle" jdbcType="VARCHAR" />
+    <result column="analyse" property="analyse" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="choose_type" property="chooseType" jdbcType="INTEGER" typeHandler="com.ulewo.po.handler.ChooseTypeHandler"/>
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_icon" property="userIcon" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" typeHandler="com.ulewo.po.handler.StatusEnumHandler"/>
+  	<collection column="id" property="examDetails" select="com.ulewo.mapper.ExamDetailMapper.selectListWithRightAnswer"/>
+  </resultMap>
+  
+  <select id="selectListWithRightAnswer" resultMap="result_map_exam_right_answer">
+	select <include refid="base_column_exam"/> from ulewo_exam <include refid="base_condition"/> 
+	order by create_time desc
+	<if test="page!=null">
+		limit #{page.start},#{page.end}
+	</if>
+  </select>
+
+  
+  <select id="selectExamUsers" resultMap="result_map_exam">
+  	select count(1) examCount,max(user_name) user_name,max(user_icon) user_icon,user_id 
+  	from ulewo_exam <include refid="base_condition"></include> group by user_id order by examCount desc
+  	<if test="page!=null">
+		limit #{page.start},#{page.end}
+	</if>
+  </select>
+  
+  <select id="selectExamUsersCount" resultType="java.lang.Integer" >
+  	select count(distinct(user_id)) from ulewo_exam <include refid="base_condition"></include>
+  </select>
+  
+  <insert id="insert" parameterType="com.ulewo.po.model.Exam">
+  	<selectKey keyProperty="id" resultType="int" order="AFTER">
+      	SELECT LAST_INSERT_ID()
+    </selectKey>
+    <![CDATA[
+	 insert into ulewo_exam(exam_title,category_id,choose_type,user_id,user_name,user_icon,analyse,create_time)values(#{examTitle},#{categoryId},#{chooseType.type},#{userId},#{userName},#{userIcon},#{analyse},#{createTime})
+	]]>
+  </insert>
+  
+  <delete id="deleteBatch">
+  	delete from ulewo_exam where id in 
+  	<foreach collection="ids" item="item" separator="," open="(" close=")">
+  		#{item}
+  	</foreach>
+  </delete>
+  
+  <update id="updateExamStatus">
+  	update ulewo_exam set status = #{status.type} where id in 
+  	<foreach collection="ids" item="item" separator="," open="(" close=")">
+  		#{item}
+  	</foreach>
+  
+  </update>
+  
+</mapper>

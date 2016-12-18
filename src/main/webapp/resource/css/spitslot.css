@@ -1,0 +1,27 @@
+@IMPORT url("spitslot.item.css");
+.left{float: left;width:800px;}
+.send-spit-input{float: left;width:677px;border: 3px solid #4590CE;border-right: none;}
+.send-spit-input textarea{width:100%;height:60px;padding: 5px;border: none;}
+.send-spit-btn{float: left;width:120px}
+.send-spit-btn a{display:block;background:#4590CE;color: #fff;text-decoration: none;border-radius:0px 8px 8px 0px;text-align: center;padding: 14px;margin-left: -6px;}
+.send-spit-btn a span{display: block;font-size: 18px;}
+.send-spit-op{margin-top: 5px;height: 30px;}
+.send-spit-op a{display: inline-block;margin-right: 10px;height: 22px;width: 22px;vertical-align: bottom;float: left;margin-top:0px;}
+.send-spit-op span.loading{float:left;margin-top:-5px;display: none;}
+.send-spit-op span.img-info{color:#A2A3A2;margin-left: 15px;}
+.right{float:right;width:280px}
+.active-user-tit{padding: 10px 15px;color: #356A99;background:#D9EBF4;font-size: 18px;}
+.active-user-con{background:#F1F7FA}
+.active-user-con ul li{list-style: none;float: left;width: 140px;text-align: center;margin-top:10px;}
+.active-user-con ul li a{display: inline-block;width: 140px;padding:10px 0px;text-decoration: none;color: #5D7895}
+.active-user-con ul li a:hover{background: #D9EBF4}
+.active-user-con ul li a img{width: 80px;height:80px;border-radius:40px;}
+.active-user-con ul li a span{margin-top: 10px;display: block;}
+
+/******重写webuploader样式*******/
+.webuploader-pick{background:none;padding:0px;}
+/*******上传图片*******/
+#image-con{display: none;text-align: left;}
+#image-con span{display:inline-block;position: relative;border: 1px solid #DDDDDD;padding: 2px;margin-right: 10px;}
+#image-con span img{max-width:150px;max-height: 150px;}
+#image-con span a{position: absolute;top:-7px;right:-7px;width:16px;height:16px;}

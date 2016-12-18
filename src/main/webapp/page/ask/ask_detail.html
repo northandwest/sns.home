@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<title>${topic.title!''} - 不错啊</title>
+<#include "../include/common.html">
+<link rel="stylesheet" href="${absolutePath}/resource/css/ask.css"/>
+<script type="text/javascript">
+ulewo.topicId = "${topic.askId?c}";
+ulewo.topicType="A";
+ulewo.topicTitle = "${topic.title!''}";
+ulewo.bestAnswerId = "${topic.bestAnswerId!''}";
+ulewo.topicUserId = "${topic.userId!''}";
+</script>
+<script type="text/javascript" src="${absolutePath}/resource/js/ask.detail.js"></script>
+</head>
+<body>
+<#include "../include/top.html">
+<div class="main">
+	<div class="navigation">
+		<a href="${absolutePath}/ask">问答</a>&nbsp;&gt;&nbsp;
+		<#if topic.bestAnswerId??>
+			<a href="${absolutePath}/ask?solveType=1">已解决问题</a>&nbsp;&gt;&nbsp;
+			<#else>
+			<a href="${absolutePath}/ask">待解决问题</a>&nbsp;&gt;&nbsp;
+		</#if>
+		
+		<span>${topic.title}</span>
+	</div>
+	<div class="topic-main-con">
+		<div class="topic-main">
+			<div class="topic-info-con">
+				<div class="topic-icon"><a href=""><img src="${absolutePath}/upload/${topic.userIcon!''}"/></a></div>
+				<div class="topic-info">
+					<div class="topic-title">
+						<a href="${absolutePath}/ask/${topic.askId}" class="title">${topic.title!''}</a>
+						<span class="time">${topic.showCreateTime!''}</span>
+					</div>
+					<div class="topic-info-d topic-count-info">
+						<a href="${absolutePath}/user/${topic.userId!''}" class="user-info"><i class="icon icon-user-name"></i><span>${topic.userName!''}</span></a>
+		       			<span class="count"><i class="icon icon-mark"></i><span>赏分：${topic.mark}</span></span>
+		       			<span class="count"><i class="icon icon-read"></i><span>阅读：${topic.readCount!'0'}</span></span>
+		       			<span class="count"><i class="icon icon-comment"></i><span>评论：<span id="comment-count">${topic.commentCount!'0'}</span></span></span>
+		       			<span class="count"><i class="icon icon-like"></i><span>喜欢：<span id="like-count">${topic.likeCount!'0'}</span></span></span>
+		       			<span class="count"><i class="icon icon-collection"></i><span>收藏：<span id="collection-count">${topic.collectionCount!'0'}</span></span></span>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="vote-con" class="vote-con"></div>
+			<div class="topic-detail">
+				${topic.content!''}
+			</div>
+				<#if topic.bestAnswer??>
+					<div class="best-answer">
+						<div class="best-answer-title">提问者采纳</div>
+						<div class="comment-item">
+						   <div class="comment-panel">
+						    <div class="user-icon">
+						     <a href="${absolutePath}/user/${topic.bestAnswer.userId}"><img src="${absolutePath}/upload/${topic.bestAnswer.userIcon}" /></a>
+						    </div>
+						    <div class="comment-con">
+						     <div class="content_detail">
+						      <a id="user-name-5667" href="${absolutePath}/user/${topic.bestAnswer.userId}">${topic.bestAnswer.userName}</a>：
+						      <span>${topic.bestAnswer.showContent}</span>
+						     </div>
+						     <div class="time-op">
+						      <span class="time">${topic.bestAnswer.showCreateTime}</span>
+						      <a href="javascript:;" pid="${topic.bestAnswer.id}" comment-id="${topic.bestAnswer.id}" class="comment-btn"><i class="icon icon-re"></i>回复</a>
+						     </div>
+						    </div>
+						    <div class="clear"></div>
+						   </div>
+						   <div class="child-panel">
+							    <#list topic.bestAnswer.children as item>
+							    	<div class="comment-panel">
+									    <div class="user-icon">
+									     <a href="${absolutePath}/user/${item.userId}"><img src="${absolutePath}/upload/${item.userIcon}" /></a>
+									    </div>
+									    <div class="comment-con">
+									     <div class="content_detail">
+									      <a id="user-name-5667" href="${absolutePath}/user/${item.userId}">${item.userName}</a>：
+									      <span>${item.showContent}</span>
+									     </div>
+									     <div class="time-op">
+									      <span class="time">${item.showCreateTime}</span>
+									      <a href="javascript:;" pid="${topic.bestAnswer.id}" comment-id="${item.id}" class="comment-btn"><i class="icon icon-re"></i>回复</a>
+									     </div>
+									    </div>
+									    <div class="clear"></div>
+									</div>
+							    </#list>
+						   </div>
+						   <div class="comment-form" id="comment-form-${topic.bestAnswer.id}">
+						    <div class="subcomment-form-textarea">
+						     <textarea></textarea>
+						    </div>
+						    <div class="comment-form-op">
+						     <a href="javascript:;" title="@好友" class="op-at"><i class="icon icon-op-at"></i></a>
+						     <a href="javascript:;" title="插入表情" class="op-emotion"><i class="icon icon-op-emotion"></i></a>
+						     <a href="javascript:;" class="btn post-comment-btn" pid="${topic.bestAnswer.id}">回复</a>
+						    </div>
+						   </div>
+						  </div>
+						</div>
+				</#if>
+			<div class="like-users">
+				<#if (topic.likeUsers?size>0)>
+				<#list topic.likeUsers as like>
+					<a href="${absolutePath}/user/${like.userId}">${like.userName}</a>
+				</#list>
+				<span class="like-info">很喜欢这篇文章</span>
+			</#if>
+			</div>
+			<#include "../comment/comment.html">
+		</div>
+	</div>
+</div>
+<#include "../include/footer.html">
+</body>
+</html>

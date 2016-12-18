@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ulewo.mapper.BlogCategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.ulewo.po.model.BlogCategory" >
+    <id column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="rang" property="rang" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <sql id="base_condition" >
+ 	<where>
+        <if test="null!=userId and ''!=userId" >
+              and  user_id = #{userId,jdbcType=VARCHAR}
+        </if>
+        <if test="null!=categoryId and 0!=categoryId" >
+              and  category_id = #{categoryId,jdbcType=VARCHAR}
+        </if>
+ 	</where>
+  </sql>
+  
+  <sql id="base_column_list" >
+    category_id,user_id,name,rang
+  </sql>
+
+  <select id="selectList" resultMap="BaseResultMap">
+      select <include refid="base_column_list"/>,
+      (select count(1) from ulewo_blog b where b.category_id =c.category_id
+       	<if test="null!=blogStatus">
+      		and b.status = #{blogStatus.type,jdbcType=VARCHAR}
+      	</if>
+      	<if test="null!=userId">
+      		and b.user_id = #{userId,jdbcType=VARCHAR}
+      	</if>
+      ) blogCount
+      from ulewo_blog_category c <include refid="base_condition"/>
+      order by rang
+  </select>
+  
+  <select id="selectCount" resultType="java.lang.Integer">
+      select count(1) from ulewo_blog_category <include refid="base_condition"/>
+  </select>
+  
+  <insert id="insert" parameterType="com.ulewo.po.model.BlogCategory" >
+    insert into ulewo_blog_category (category_id,user_id, name,rang)
+    values (#{categoryId,jdbcType=INTEGER},#{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},#{rang,jdbcType=INTEGER})
+    ON DUPLICATE KEY UPDATE name = #{name,jdbcType=VARCHAR},rang = #{rang,jdbcType=INTEGER}
+  </insert>
+  
+  <delete id="delete">
+        delete from ulewo_blog_category <include refid="base_condition"/>
+  </delete>
+</mapper>

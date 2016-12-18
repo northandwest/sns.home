@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<title>登陆   - 不错啊</title>
+<#include "include/common.html">
+<link rel="stylesheet" href="../resource/css/register.css"/>
+<script src="../resource/js/user.login.js"></script>
+</head>
+<body>
+<#include "include/top.html">
+<div class="main">
+	<div class="register">
+		<form class="u-form">
+			<div class="form-item">
+				<div class="item-tit">账号：</div>
+				<div class="item-input"><input type="text" name="account"  checkData="{rq:true,msg:'请输入正确的账号'}" placeholder="请输入用户名或者邮箱"></div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit">登录密码：</div>
+				<div class="item-input"><input type="password" name="password" placeholder="请输入密码 " checkData="{rq:true,msg:'请输入正确的密码'}"></div>
+				<div class="clear"></div>
+			</div>
+			<div id="checkCode-area">
+				<#if checkCode??>
+					<div class="form-item">
+						<div class="item-tit">验证码：</div>
+						<div class="item-input"><input type="text" name="checkCode" class="check-code" placeholder="请输入验证码"  checkData="{rq:true}"></div>
+						<div class="check_code"><a href="javascript:void(0)" id="refreshCheckCode"><img src="checkCode"></a></div>
+						<div class="clear"></div>
+					</div>
+				</#if>
+			</div>
+			<div class="form-item">
+				<div class="item-tit"></div>
+				<div class="item-input"><label><input type="checkbox" class="remember-me not-input" name="rememberMe" value="1">记住我的登录信息 (<span class="remember-info-red">请勿在公用电脑或者网吧内使用此项</span>)</label></div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit"></div>
+				<div class="item-input"><a href="javascript:void(0)" class="btn login-btn">登录</a>&nbsp;&nbsp;<a href="findpwd" class="forget-pwd">忘记密码？</a></div>
+				<div class="clear"></div>
+			</div>
+		</form>
+	</div>
+</div>
+<#include "include/footer.html">
+</body>
+</html>

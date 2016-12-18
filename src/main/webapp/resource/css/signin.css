@@ -1,0 +1,36 @@
+.sign-btn{background:#4590CE;height:40px;display:inline-block;color: #fff;border-radius:5px;padding: 15px 25px;}
+.sign-btn:hover{background: #346B99}
+.sign-btn span{font-size: 15px;}
+.sign-btn .week{display: block;float: left;}
+.sign-btn .week #week-data{display: block;font-size: 16px;text-align: center;}
+.sign-btn .week #day-data{display: block;}
+.sign-btn .sign-info{display: block;float: left;margin-left: 40px;width:115px;margin-top: 2px;}
+.icon-sigin{display: inline-block;width: 32px;height: 32px;background-position: 0px -247px;float: left;}
+.sign-btn .sign-info .sign-tit{font-size:25px;font-weight: bold;float: left;margin-left: 5px;}
+.sign-btn .sign-days{display: block;float: left;margin-left: 40px;}
+.sign-btn .sign-days #sign-days{display: block;text-align: center;}
+.sign-btn .sign-days .sign-days-day{display: block;}
+.today-signin-info{margin-top: 20px;}
+
+/*****今日签到信息*****/
+.signIn-item{border: 1px solid #B3B4B3;display: inline-block;padding: 2px;margin-right: 24px;margin-top: 10px;}
+.signIn-item .signIn-item-img{float: left;}
+.signIn-item .signIn-item-img img{width: 60px;height: 60px;border: none;}
+.signIn-item .signIn-item-info{float: left;margin-left:10px;width: 120px;}
+.signIn-item .signIn-item-info .signIn-item-name{margin-top:8px;}
+.signIn-item .signIn-item-info a{color: #5D7895}
+.signIn-item .signIn-item-info .signIn-item-time{margin-top: 5px;color: #494949}
+
+/********我的签到*********/
+#userSignIn td{color:#0479C8;text-align:center;width:65px;height:30px}
+.calendarCon{float:left;width:480px;border:1px solid #9FBEDB;margin-right:10px;margin-top:10px;height:270px;}
+#userSignIn td.afterday{color:#AAAAAA}
+td.month{font-size:16px;font-weight:bold}
+.selectDiv{margin-top:10px;}
+.selectCon select{width:250px;margin-left:10px;margin-top:10px;margin:0px;padding:0px;margin-top:3px;height:30px;}
+.selectCon{float:left;width:260px;}
+.noSignin{float:left;width:80px;height:20px;background:#AAAAAA;margin-left:10px;color:#FFFFFF;text-align:center;padding:5px 0px 3px 0px;margin-top: 3px;}
+.Signin{float:left;width:80px;height:20px;background:#4590CE;margin-left:10px;color:#FFFFFF;text-align:center;padding:5px 0px 3px 0px;margin-top: 3px;}
+#userSignIn td.tdsignin{background:#4590CE;color:#FFFFFF}
+#userSignIn td.tdnosignin{background:#AAAAAA;color:#FFFFFF}
+#userSignIn td.curDay{background:red;color:#FFFFFF}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ulewo.mapper.ExamDetailMapper" >
+  <resultMap id="result_map_exam_detail" type="com.ulewo.po.model.ExamDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="exam_id" property="examId" jdbcType="INTEGER" />
+    <result column="answer" property="answer" jdbcType="VARCHAR" />
+    <result column="is_right_answer" property="isRightAnswer" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <sql id="base_column_exam_detail" >
+     id,exam_id,answer
+  </sql>
+  
+  <insert id="insertBatch" parameterType="java.util.List">
+	 insert into ulewo_exam_detail(exam_id,answer,is_right_answer)values
+	 	<foreach collection="list" item="item" separator=",">
+	 	(
+	 		#{item.examId},#{item.answer},#{item.isRightAnswer}
+	 	)
+	 	</foreach>
+  </insert>
+  
+  <select id="selectListWithRightAnswer"  resultMap="result_map_exam_detail">
+	  select  <include refid="base_column_exam_detail"/>,is_right_answer from ulewo_exam_detail
+	  where exam_id = #{examId}
+  </select>
+  
+  <select id="selectList"  resultMap="result_map_exam_detail">
+	  select  <include refid="base_column_exam_detail"/> from ulewo_exam_detail
+	  where exam_id = #{examId}
+  </select>
+  
+  <delete id="delete">
+  	delete from ulewo_exam where exam_id = #{examId}
+  </delete>
+</mapper>

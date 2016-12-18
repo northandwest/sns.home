@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ulewo.mapper.CommentMapper" >
+  <resultMap id="base_result_map" type="com.ulewo.po.model.Comment" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="article_id" property="articleId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_icon" property="userIcon" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <collection column="id" property="children" ofType="com.ulewo.po.model.Comment" select="com.ulewo.mapper.CommentMapper.selectChildren"/>
+  </resultMap>
+  
+  <resultMap id="base_result_map_no_children" type="com.ulewo.po.model.Comment" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="article_id" property="articleId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_icon" property="userIcon" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="base_column_list" >
+    id, pid, article_id,user_id,user_name,user_icon,content,create_time
+  </sql>
+  <sql id="base_condition" >
+      <where>
+         <if test="articleId!=null" >
+             and article_id= #{articleId,jdbcType=INTEGER}
+         </if> 
+         <if test="articleType!=null" >
+             and article_type= #{articleType.type,jdbcType=VARCHAR}
+         </if> 
+         <if test="pid!=null" >
+             and pid= #{pid,jdbcType=INTEGER}
+         </if> 
+          <if test="commentId!=null" >
+             and id= #{commentId,jdbcType=INTEGER}
+         </if> 
+        <if test="userName!=null and ''!=userName">
+    		and user_name like '%${userName}%'
+    	</if>
+    	 <if test="null!=startTime and ''!=startTime">
+             <![CDATA[
+                and create_time >='${startTime} 00:00:00'
+             ]]>
+          </if>
+          <if test="null!=endTime and ''!=endTime">
+              <![CDATA[
+                and create_time <= '${endTime} 23:59:59'
+              ]]>
+          </if>
+      </where>
+  </sql>
+ 
+  <select id="selectChildren" resultType="com.ulewo.po.model.Comment">
+      select id,pid,article_id articleId,user_id userId,user_name userName,user_icon userIcon,content,create_time createTime from ulewo_comment where pid= #{pid}
+  </select>
+  
+  <select id="selectCommentNoChildren" resultMap="base_result_map_no_children">
+      select <include refid="base_column_list"/> from  ulewo_comment where id= #{commentId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectListNoChildren" resultMap="base_result_map_no_children">
+      select <include refid="base_column_list"/> from  ulewo_comment <include refid="base_condition"/>
+      <if test="orderBy!=null">
+	        order by ${orderBy.orderBy}
+	  </if>
+      <if test="page!=null">
+            limit #{page.start},#{page.end}          
+      </if>
+  </select>
+  
+  <select id="selectList" resultMap="base_result_map">
+      select <include refid="base_column_list"/> from  ulewo_comment <include refid="base_condition"/>
+      <if test="orderBy!=null">
+	        order by ${orderBy.orderBy}
+	  </if>
+      <if test="page!=null">
+            limit #{page.start},#{page.end}          
+      </if>
+  </select>
+  
+  <select id="selectCount" resultType="java.lang.Integer">
+      select count(1) from  ulewo_comment <include refid="base_condition"/>
+  </select>
+  
+  <insert id="insert" parameterType="com.ulewo.po.model.Comment" >
+  	 <selectKey keyProperty="id" resultType="int" order="AFTER">
+      	SELECT LAST_INSERT_ID()
+     </selectKey>
+  	  <![CDATA[
+	    insert into ulewo_comment (pid, article_id,user_id,user_name,user_icon,create_time,content,article_type)
+	    values (#{pid,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}, 
+	      #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userIcon,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+	      #{content,jdbcType=LONGVARCHAR},#{articleType.type,jdbcType=VARCHAR})
+      ]]>
+  </insert>
+  
+  <delete id="deleteComment">
+  	delete from ulewo_comment where id = #{commentId} or pid=#{commentId}
+  </delete>
+  
+</mapper>

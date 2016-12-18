@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<title>注册   - 不错啊</title>
+<#include "include/common.html">
+<link rel="stylesheet" href="../resource/css/register.css"/>
+<script src="../resource/js/user.register.js"></script>
+</head>
+<body>
+<#include "include/top.html">
+<div class="main">
+	<div class="register">
+		<form class="u-form">
+			<div class="form-item">
+				<div class="item-tit">账号：</div>
+				<div class="item-input"><input type="text" name="userName"  checkData="{max:20,reg:'all',rq:true,msg:'请输入正确的账号'}" placeholder="长度1-20位字符，中文、数字、_ 、字母"></div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit">邮箱：</div>
+				<div class="item-input"><input type="text" name="email" placeholder="用于取回密码，请填写正确的常用邮箱" checkData="{reg:'email',rq:true,msg:'请输入正确的邮箱'}"></div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit">登录密码：</div>
+				<div class="item-input"><input type="password" name="password" placeholder="密码长度6-16位字符，由数字、字母组成" checkData="{min:6,max:16,reg:'common',rq:true,msg:'请输入正确的密码'}"></div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit">确认登录密码：</div>
+				<div class="item-input"><input type="password" name="rePassword" placeholder="请再次输入密码" checkData="{rq:true,msg:'请再次输入密码'}"></div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit">验证码：</div>
+				<div class="item-input"><input type="text" name="checkCode" class="check-code" placeholder="请输入验证码"  checkData="{rq:true}"></div>
+				<div class="check_code"><a href="javascript:void(0)" id="refreshCheckCode"><img src="checkCode"></a></div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit"></div>
+				<div class="item-input"><a href="javascript:void(0)" class="btn register-btn">加入不错啊</a></div>
+				<div class="clear"></div>
+			</div>
+		</form>
+	</div>
+</div>
+<#include "include/footer.html">
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<#include "../include/common.html">
+<title>修改头像</title>
+<link rel="stylesheet" href="${absolutePath}/resource/css/admin.user.css"/>
+<link rel="stylesheet" href="${absolutePath}/resource/css/jquery.Jcrop.min.css">
+<link rel="stylesheet" type="text/css" href="${absolutePath}/resource/webuploader/webuploader.css?version=3.1"/>
+<script type="text/javascript" src="${absolutePath}/resource/webuploader/webuploader.min.js?version=3.1"></script>
+<script src="${absolutePath}/resource/js/jquery.Jcrop.min.js"></script>
+<script src="${absolutePath}/resource/js/jQuery.UtrialAvatarCutter.js"></script>
+</head>
+<body>
+<#include "top.html">
+<div class="main">
+    <#include "left.html">
+    <div class="main-right">
+        <div class="navigation"><span>个人信息管理</span>&nbsp;&gt;&nbsp;<span>修改头像</span></div>
+        <div class="save-btn">
+            <a href="javascript:;" class="btn" id="save-btn">保存头像</a>
+        </div>
+        <ul class="tag"  id="tag">
+            <li class="active"><a href="javascript:void(0)">自定义头像</a></li>
+            <li><a href="javascript:void(0)">系统头像</a></li>
+        </ul>
+        <div class="tag-content">
+            <div class="file_upload" id="file_upload">
+                   <div class="file-uploader">
+                       <div id="filePicker">上传图片</div>
+                       <div id="loading-upload"><img src="${absolutePath}/resource/images/loading.gif" noLazyload="true"></div>
+                   </div>
+                   <div class="file-info"><span class="info">图片不能超过2M，宽度不能超过1000px</span></div>
+                   <div class="clear"></div>
+             </div>
+             <div id="imgarea">
+				<div id="picture_original">
+					<img src="" id="target-img"/>
+				</div>
+				<div id="preview">
+					<div id="picture_200"></div>
+				</div>
+				<div style="clear:left;"></div>
+			</div>
+        </div>
+        <div class="tag-content">
+            <div id="sys-user-icon">
+            
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${absolutePath}/resource/js/admin.user.changeicon.js"></script>
+</body>
+</html>

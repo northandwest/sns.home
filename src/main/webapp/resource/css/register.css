@@ -1,0 +1,9 @@
+form.u-form .item-tit{width:100px;}
+form.u-form .item-input input{width: 260px;}
+form.u-form .item-input input.check-code{width: 100px;}
+form.u-form .item-input input.remember-me{width:15px;height: 15px;}
+form.u-form .item-input label{cursor: pointer;vertical-align:middle;}
+form.u-form .item-input label input{vertical-align:middle;}
+form.u-form .item-input label span.remember-info-red{color: #B52222;vertical-align: top}
+
+a.forget-pwd{color: #3E62A6;}

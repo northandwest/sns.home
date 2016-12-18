@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ulewo.mapper.StatisticsMapper" >
+  <resultMap id="base_result_map" type="com.ulewo.po.model.Statistics" >
+    <id column="statistics_date" property="statisticsDate" jdbcType="DATE" />
+    <result column="signin_count" property="signinCount" jdbcType="INTEGER" />
+    <result column="spit_slot_count" property="spitSlotCount" jdbcType="INTEGER" />
+    <result column="spit_slot_comment_count" property="spitSlotCommentCount" jdbcType="INTEGER" />
+    <result column="topic_count" property="topicCount" jdbcType="INTEGER" />
+    <result column="topic_comment_count" property="topicCommentCount" jdbcType="INTEGER" />
+    <result column="knowledge_count" property="knowledgeCount" jdbcType="INTEGER" />
+    <result column="knowledge_comment_count" property="knowledgeCommentCount" jdbcType="INTEGER" />
+    <result column="ask_count" property="askCount" jdbcType="INTEGER" />
+    <result column="ask_comment_count" property="askCommentCount" jdbcType="INTEGER" />
+    <result column="blog_count" property="blogCount" jdbcType="INTEGER" />
+    <result column="blog_comment_count" property="blogCommentCount" jdbcType="INTEGER" />
+    <result column="exam_count" property="examCount" jdbcType="INTEGER" />
+    <result column="user_count" property="userCount" jdbcType="INTEGER" />
+    <result column="active_user_count" property="activeUserCount" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="base_condition" >
+    <where>
+        <if test="startDate!=null">
+             <![CDATA[
+                and statistics_date>=#{startDate}
+             ]]>
+        </if>
+        <if test="null!=endDate">
+              <![CDATA[
+                and statistics_date<=#{endDate}
+              ]]>
+        </if>
+    </where>
+  </sql>
+  
+  <sql id="base_column_list">
+    statistics_date, signin_count, spit_slot_count, spit_slot_comment_count, topic_count, 
+    topic_comment_count, knowledge_count, knowledge_comment_count, ask_count, ask_comment_count, 
+    blog_count, blog_comment_count, exam_count, user_count, active_user_count
+  </sql>
+  
+  <select id="selectList" resultMap="base_result_map">
+    select <include refid="base_column_list" /> from ulewo_statistics <include refid="base_condition"/> order by statistics_date asc
+  </select>
+  
+  <insert id="insert" parameterType="com.ulewo.po.model.Statistics" >
+    insert into ulewo_statistics (statistics_date, signin_count, spit_slot_count, 
+      spit_slot_comment_count, topic_count, topic_comment_count, 
+      knowledge_count, knowledge_comment_count, 
+      ask_count, ask_comment_count, blog_count, 
+      blog_comment_count, exam_count, user_count, 
+      active_user_count)
+    values (#{statisticsDate,jdbcType=DATE}, #{signinCount,jdbcType=INTEGER}, #{spitSlotCount,jdbcType=INTEGER}, 
+      #{spitSlotCommentCount,jdbcType=INTEGER}, #{topicCount,jdbcType=INTEGER}, #{topicCommentCount,jdbcType=INTEGER}, 
+      #{knowledgeCount,jdbcType=INTEGER}, #{knowledgeCommentCount,jdbcType=INTEGER}, 
+      #{askCount,jdbcType=INTEGER}, #{askCommentCount,jdbcType=INTEGER}, #{blogCount,jdbcType=INTEGER}, 
+      #{blogCommentCount,jdbcType=INTEGER}, #{examCount,jdbcType=INTEGER}, #{userCount,jdbcType=INTEGER}, 
+      #{activeUserCount,jdbcType=INTEGER})
+      ON DUPLICATE KEY UPDATE signin_count=VALUES(signin_count), spit_slot_count=VALUES( spit_slot_count), 
+      spit_slot_comment_count=VALUES( spit_slot_comment_count), topic_count=VALUES( topic_count), 
+      topic_comment_count=VALUES( topic_comment_count),knowledge_count=VALUES(knowledge_count), 
+      knowledge_comment_count=VALUES( knowledge_comment_count),ask_count=VALUES(ask_count), 
+      ask_comment_count=VALUES( ask_comment_count), blog_count=VALUES( blog_count),blog_comment_count=VALUES(blog_comment_count), 
+      exam_count=VALUES( exam_count), user_count=VALUES( user_count),active_user_count=VALUES(active_user_count)
+  </insert>
+</mapper>

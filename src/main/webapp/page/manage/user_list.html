@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<#include "../include/common.html">
+<script language="javascript" type="text/javascript" src="${absolutePath}/resource/datepicker/WdatePicker.js"></script>
+<link rel="stylesheet" href="${absolutePath}/resource/css/manager.public.css"/>
+<script src="${absolutePath}/resource/js/manager.user.list.js"></script>
+<title>用户管理</title>
+</head>
+<body>
+<#include "top.html">
+<div class="main">
+	<#include "left.html">
+	<div class="main-right">
+		<div class="navigation"><span>用户管理</span>&nbsp;&gt;&nbsp;<span>用户列表</span></div>
+		<div class="search">
+		    <form id="searchform" onsubmit="return false">
+			  <table class="table">
+			    <tbody>
+				  <tr>
+				  	<td class="tit-left">用户名</td>
+			        <td class="tit">
+						<input class="input input-small" type="text" name="userNameFuzzy">
+					</td>
+			        <td class="tit-left">注册时间</td>
+			        <td class="tit">
+						<input class="input input-small" onclick="WdatePicker()" type="text" name="startDate" value="" readonly="readonly">&nbsp;-&nbsp;
+						<input class="input input-small" onclick="WdatePicker()" type="text" name="endDate" value="" readonly="readonly">
+					</td>
+			        <td class="tit"><a href="javascript:search()" class="btn">查询</a></td>
+			      </tr>
+			  </tbody>
+			  </table>
+			</form>
+		</div>
+		<div class="grid-list">
+			<table class="table table-list hover">
+				<thead>
+					<th width="50">头像</th>
+					<th width="150">用户名</th>
+					<th width="50">性别</th>
+					<th width="100">出生日期</th>
+					<th width="100">工作</th>
+					<th width="100">地区</th>
+					<th width="100">注册时间</th>
+                    <th width="100">最后登录时间</th>
+                    <th width="50">积分</th>
+					<th>个性签名</th>
+					<th width="100">操作</th>
+				</thead>
+				<tbody id="data-list">
+					
+				</tbody>
+			</table>
+			</div>
+			<div id="pager">
+				
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

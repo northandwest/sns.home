@@ -1,0 +1,47 @@
+.left{width:790px;float: left;}
+.part-title{padding:5px 5px 0px 10px;text-align: left;}
+.part-title a.part{text-decoration: none;color: #000;font-weight: 400;font-size: 18px;padding-bottom: 3px;display: inline-block;}
+.part-title a.cate{font-size: 13px;text-decoration: none;display: inline-block;margin-left: 10px;}
+.part-title a.cate:hover{text-decoration: underline;}
+.data-list{margin-bottom: 20px;border: 1px solid #ccc;padding: 5px;padding-bottom: 10px;border-radius:8px}
+.data-item{padding: 10px 5px 8px 10px;border-bottom: 1px dashed #ccc}
+.data-item a.tit{text-decoration: none;color: #494949;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;display: inline-block;max-width:450px;float: left;}
+.data-item a.tit:hover{color:#CC0000}
+.data-item span.time{padding-left: 10px;font-size: 12px;color: #888}
+.data-item div.read{display: inline-block;float: right;font-size: 12px;color: #888}
+.data-item a.new{background: url("../images/new.png"); background-repeat: no-repeat;padding-left: 20px;}
+.right{float: right;width:300px}
+.sign-btn{background:#4590CE;height:40px;display:inline-block;color: #fff;border-radius:5px;padding: 15px 25px;}
+.sign-btn:hover{background: #346B99}
+.sign-btn span{font-size: 15px;}
+.sign-btn .week{display: block;float: left;}
+.sign-btn .week #week-data{display: block;font-size: 16px;text-align: center;}
+.sign-btn .week #day-data{display: block;}
+.sign-btn .sign-info{display: block;float: left;margin-left: 34px;width:114px;margin-top: 2px;}
+.icon-sigin{display: inline-block;width: 32px;height: 32px;background-position: 0px -247px;float: left;}
+.sign-btn .sign-info .sign-tit{font-size:25px;font-weight: bold;float: left;margin-left: 5px;}
+.sign-btn .sign-days{display: block;float: left;margin-left: 35px;}
+.sign-btn .sign-days #sign-days{display: block;text-align: center;}
+.sign-btn .sign-days .sign-days-day{display: block;}
+.today-signin-info{margin-top: 20px;}
+.index-today-count{margin-top:5px;}
+#index_count{display: inline-block;margin-left: 5px;color: #ff999a;font-weight: bold;}
+.data-item a.blog-tit{text-decoration: none;color: #494949;display: block;}
+.data-item a.blog-tit:hover{color:#CC0000}
+.data-item span.blog-time{font-size: 12px;color: #888;display: block;margin-top: 5px;text-align: right;}
+.data-item span.blog-time .blog-time-name{float: left;display: inline-block;}
+.data-item span.blog-time .blog-time-time{float: right;display: inline-block;}
+.home-tools a{display:inline-block;padding: 5px;border:1px solid #ccc;text-decoration: none;float: left;margin-left:5px;margin-top: 5px;text-align: center;border-radius:3px}
+.home-tools a:hover{background: #888;color: #fff}
+.service{margin: 15px 0px;}
+.service div.about-part-con{max-height: 500px;overflow-y:auto;font-size: 13px;padding: 0px 3px;}
+.weather-img{height: 90px;}
+.weather-img .img{display: inline-block;float: left;}
+.weather-img .weather-info{display: inline-block;float: left;}
+.city-info{height: 40px;}
+.city-info .city{font-size:25px;font-weight: bolder;padding-right: 10px;border-right: 1px solid #426286;color: #426286;display: inline-block;float: left;}
+.city-info .loc{padding-left: 10px;display: inline-block;float: left;margin-top:10px;}
+.cond{margin-top: 25px;font-size:16px;}
+.tmp{padding-left: 10px;}
+.sc{margin-top: 10px;}
+.hum{padding-left: 10px;}

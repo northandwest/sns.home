@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<title>讨论区   - 不错啊</title>
+<#include "../include/common.html">
+<script type="text/javascript" src="${absolutePath}/resource/ueditor1_4_3/ueditor.config.js"></script>
+<script type="text/javascript" src="${absolutePath}/resource/ueditor1_4_3/ueditor.all.js"></script>
+<script type="text/javascript" charset="utf-8" src="${absolutePath}/resource/ueditor1_4_3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="${absolutePath}/resource/ueditor1_4_3/myActionUrl.js"></script>
+<script language="javascript" type="text/javascript" src="${absolutePath}/resource/datepicker/WdatePicker.js"></script>
+<script type="text/javascript" src="${absolutePath}/resource/webuploader/webuploader.min.js?version=3.1"></script>
+<link rel="stylesheet" type="text/css" href="${absolutePath}/resource/webuploader/webuploader.css?version=3.1"/>
+<link rel="stylesheet" href="../resource/css/bbs.css"/>
+</head>
+<body>
+<#include "../include/top.html">
+<div class="main">
+	<div class="navigation"><a href="${absolutePath}/bbs">讨论区</a>&nbsp;&gt;&nbsp;<a href="${absolutePath}/bbs/post_topic.action">发布帖子</a></div>
+	<form class="u-form" autocomplete="off" id="post-form">
+		<input name="richContent" id="richContent" type="hidden"/>
+			<div class="form-item">
+				<div class="item-tit"><em>*</em>标题：</div>
+				<div class="item-input"><input maxlength="150" class="title-input" type="text" name="title"  checkData="{rq:true,msg:'请输入标题'}" placeholder="请输入标题"></div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit"><em>*</em>板块：</div>
+				<div class="item-input">
+				    <span>
+						<select name="pCategoryId" id="pCategoryId" checkData="{rq:true,msg:'请选择分类'}">
+							<option value="">请选择一级板块</option>
+						</select>
+					</span>
+					<span>
+						<select name="categoryId" id="categoryId">
+							<option value="">请选择子板块</option>
+						</select>
+					</span>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit"><em>*</em>类型：</div>
+				<div class="item-input">
+					<#list topicType as item>
+						<label><input class="not-input topicType" type="radio" value="${item.getType()}" name="topicType" <#if item_index==0>checked="checked"</#if> /><span>${item.getDesc()}</span></label>
+					</#list>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item" id="vote">
+				<div class="item-tit"></div>
+				<div class="item-input">
+					<div>投票选项：</div>
+					<div class="vote-input"><input checkData="{rq:true,msg:'选项内容不能能为空'}" class="title-input" placeholder="请输入选项内容" maxlength="200" type="text" name="voteTitle">&nbsp;&nbsp;<a href="javascript:;" id="addVote">添加投票选项</a></div>
+					<div class="vote-input"><input checkData="{rq:true,msg:'选项内容不能能为空'}" class="title-input" placeholder="请输入选项内容" maxlength="200" type="text" name="voteTitle"></div>
+					<div id="vote-input-list">
+					
+					</div>
+					<div class="vote-type">
+						<span>投票类型：</span>
+						<label><input class="not-input" type="radio" value="1" name="voteType" checked="checked"><span>单选</span></label>
+						<label><input class="not-input" type="radio" value="2" name="voteType"><span>多选</span></label>
+					</div>
+					<div class="vote_time">
+						投票截止日期:<input id="end-date" checkData="{rq:true,msg:'截止日期不能为空'}" value="${nextMonthToday!''}" type="text" onClick="WdatePicker()" readonly="readonly" name="endDateStr"/>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				 <div class="item-tit"><em>*</em>内容：</div>
+				 <div class="item-input">
+    				<script id="content" type="text/plain">
+					</script>
+    			</div>
+    			<div class="clear"></div>
+			</div>
+			<input type="hidden" name="fileName" id="attached_file_name" />
+			<input type="hidden" name="fileUrl" id="attached_file" />
+			
+			<div class="form-item">
+				 <div class="item-tit">上传附件：</div>
+				 <div class="item-input">
+				 		<div class="file_upload" id="file_upload">
+							<div class="file-uploader">
+								<div id="filePicker">上传附件</div>
+								<div id="loading-upload"><img src="${absolutePath}/resource/images/loading.gif" noLazyload="true"></div>
+							</div>
+							<div class="file-info"><span class="info">大小不能超过2M，只能是.rar、.zip文件</span></div>
+							<div class="clear"></div>
+						</div>
+						<div id="file-list">
+							
+						</div>
+						<div class="file_upload_mark form-input-mark"><span>下载附件所需积分：</span><span><input type="text" checkData="{number:true,msg:'积分只能是数字'}" maxlength="5" name="downloadMark" id="mark" value="0"></span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="${absolutePath}/set_mark" target="_blank">为什么要设置积分?</a></div>
+    			</div>
+    			<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit"></div>
+				<div class="item-input"><a href="javascript:void(0)" id="post-btn" class="btn">&nbsp;&nbsp;发表主题&nbsp;&nbsp;</a></div>
+				<div class="clear"></div>
+			</div>
+		</form>
+</div>
+<script src="../resource/js/bbs.add.js"></script>
+<#include "../include/footer.html">
+</body>
+</html>

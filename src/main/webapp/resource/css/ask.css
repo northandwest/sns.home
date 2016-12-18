@@ -1,0 +1,57 @@
+.left{float: left;width: 800px;background:#F3F4F3 }
+.left-main{margin: 10px;margin-top:0px;background: #fff;padding: 20px;}
+.title-item{border-bottom: 1px dashed #D5D5D5;padding: 15px 0px;word-wrap : break-word ;}
+.title-item .title a{color: #336a9a;font-size: 16px;display: inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;max-width:500px;float: left;}
+.title-item .title span.mark{color:#aaaaaa;display: inline-block;margin-left:10px;float: left;margin-top: 2px;}
+.title-item .title span.time{float: right;color:#aaaaaa;font-size: 12px;display: inline-block;margin-top: 2px;}
+.title-item .title span.answer{float: right;color:#aaaaaa;font-size: 12px;display: inline-block;margin-top: 2px;margin-right: 10px;}
+
+.title-item .summary{color: #5f5f5f;font-size: 12px;margin-top: 10px;line-height: 15px;}
+.right-page{height: 30px;margin-top: 10px;}
+.right-page ul.pagination {float: right;}
+.tag{background: #F3F4F3;margin: 0px;padding: 0px;margin:10px 0px 0px 10px;}
+.tag a{display: inline-block;padding: 10px 20px;font-size: 16px;color: #5F605F}
+.tag a:hover,.tag a.active{background: #fff;color:#336a9a }
+.right{width:270px;float: right;}
+.right .count-info p {font-size: 15px;color: #5F605F}
+.right .count-info p .day-count{display: inline-block;width: 150px}
+.rang{margin-top: 20px;background: #F3F4F3;padding: 10px;}
+.rang .rang-title{height:25px;}
+.rang .rang-title span.rang-bang{color: #336a9a;display: inline-block;float: left;padding-left: 10px;font-size: 16px}
+.rang .rang-title span.rang-count{color: #336a9a;display: inline-block;float:right;padding-right: 10px;font-size: 16px}
+.rang-list{background: #fff;padding:15px 10px;}
+.rang-user{float: left;display: inline-block;margin-bottom: 15px;}
+.rang-user a{display: inline-block;margin-left:10px;}
+.rang-user span.rang-num{display: inline-block;padding:2px;width:18px;border-radius:5px;text-align: center;color: #AAABAA}
+.rang-user span.rang-num1{background: #33699A;color: #fff }
+.rang-user span.rang-num2{background: #5D8AAE;color: #fff }
+.rang-user span.rang-num3{background: #83A7C4;color: #fff }
+.rang-item-count{float: right;display: inline-block;margin-right: 10px;color:#AAABAA }
+a.post-btn{display: block;text-align: center;padding:15px 0px 15px 0px;}
+a.post-btn span{font-size: 22px;vertical-align: middle;font-weight: bold;padding-left:5px;}
+form.u-form .item-tit {width: 100px;}
+form.u-form .item-input input.title-input{width:750px;}
+form.u-form .item-input input.mark-input{width:50px;}
+form.u-form .item-input .left-mark{color: red;}
+
+
+/**********详情************/
+.topic-main-con{background: #F3F4F3;padding: 15px;}
+.topic-main{background: #fff;padding: 15px;}
+.topic-info-con{border-bottom: 1px solid #CCCCCC;padding-bottom: 15px;}
+.topic-icon{float: left;width: 60px;}
+.topic-icon img{width: 60px;border-radius: 30px}
+.topic-info{float: left;margin-left: 10px;width: 970px;}
+.topic-title a.title{font-size: 18px;color: #336A9A;margin-top: 5px;text-decoration: none;}
+.topic-title span.time{color: #aaaaaa;font-size: 12px;margin-left: 20px;}
+
+.topic-count-info{margin-top: 10px;}
+.topic-count-info a{font-size: 12px;text-decoration: none;}
+.topic-count-info span.count{display: inline-block;margin-left: 10px;color: #5f5f5f;}
+.topic-count-info span{font-size: 12px;}
+
+.like-users {margin-top: 10px;}
+.like-users a{display: inline-block;margin-right: 5px;}
+
+.best-answer-title{font-size: 18px;font-weight: bold;padding-left:60px;color: #2fa900}
+.best-answer{background: url("../images/best.png") 5px 5px;background-repeat:no-repeat;background-color:#F3FFEC;padding-top: 30px;}

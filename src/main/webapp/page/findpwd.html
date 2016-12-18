@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<title>找回密码   - 不错啊</title>
+<#include "include/common.html">
+<link rel="stylesheet" href="../resource/css/register.css"/>
+<script src="../resource/js/user.findpwd.js"></script>
+</head>
+<body>
+<#include "include/top.html">
+<div class="main">
+	<div class="register">
+		<form class="u-form">
+			<div class="form-item">
+				<div class="item-tit">邮箱：</div>
+				<div class="item-input"><input type="text" id="findEmail" name="email" placeholder="请输入您的注册邮箱" checkData="{reg:'email',rq:true,msg:'请输入正确的邮箱'}"></div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit">验证码：</div>
+				<div class="item-input"><input type="text" name="checkCode" class="check-code" placeholder="请输入验证码"  checkData="{rq:true}"></div>
+				<div class="check_code"><a href="javascript:void(0)" id="refreshCheckCode"><img src="checkCode"></a></div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit"></div>
+				<div class="item-input"><a href="javascript:void(0)" class="btn">发送验证码</a></div>
+				<div class="clear"></div>
+			</div>
+		</form>
+	</div>
+</div>
+<#include "include/footer.html">
+</body>
+</html>

@@ -1,0 +1,41 @@
+.comment-btn-con{margin: 10px 0px;}
+.comment-btn-con a{margin-right: 10px;}
+.comment-item{border-bottom: 1px dashed #E0E0E0;padding:10px 10px 20px 10px;}
+.comment-btn-con a{margin-right: 10px;}
+.user-icon{width: 40px;float: left;}
+.user-icon a img{width: 40px;border-radius:20px;}
+.comment-con{margin-left: 50px;}
+.comment-form{display: none;}
+.child-panel{padding-left: 50px;}
+.comment-item .comment-form{margin-left: 50px;margin-top: 10px;width: 700px;}
+.comment-item .comment-form textarea{width:700px;height:150px;border-radius:5px;padding-top: 5px;}
+.comment-item .comment-form-op{margin-top: 5px;}
+.comment-item .comment-form-op a.op-at{margin-right: 10px;}
+.comment-item .comment-form-op a.post-comment-btn{float: right;}
+.comment-area{margin-top: 20px;position: relative;}
+.comment-panel{margin-top: 10px;}
+.comment-panel .time-op{height: 30px;}
+.comment-panel .time-op span.time{color:#9B9B9B;font-size: 12px;float: left;margin-top: 10px;} 
+.comment-panel .time-op a{margin-left: 10px;display: inline-block;text-decoration: none;font-size: 12px;float: left;margin-top: 10px;}
+.comment-panel .time-op a.accept-btn{padding: 5px 10px;margin-top:3px;display: none;}
+.comment-panel .content_detail{line-height: 20px;word-wrap: break-word;margin-top: 5px;font-size: 13px;}
+.comment-panel .content_detail a{text-decoration: none;}
+
+/**********未登陆遮罩**************/
+.no-login-shade{top: -10px;left: -16px;width: 1072px;height: 300px;z-index: 1000;filter:alpha(opacity=20);-moz-opacity:0.2;opacity:0.2;background: #000000;position: absolute;}
+.login-panel{z-index: 10000000;background: #fff;width: 250px;height: 30px;position: absolute;top: 140px;left: 400px;text-align: center;padding-top: 10px;color: #5F5F5F}
+
+.right-op-panel{position:fixed;width:65px;top:300px;right:200px;background: #ECEEEE}
+.right-op-panel a{display: block;width: 65px;height:65px;background: url("../images/icon.png");vertical-align:middle;border-bottom: 1px solid #fff}
+.right-op-panel a.op-post-comment{background-position: 16px -810px}
+.right-op-panel a.op-post-comment:hover{background-position: -35px -810px}
+.right-op-panel a.op-go-comment{background-position: 16px -860px}
+.right-op-panel a.op-go-comment:hover{background-position: -35px -860px}
+.right-op-panel a.op-do-like{background-position: 16px -910px}
+.right-op-panel a.op-do-like:hover{background-position: -35px -910px}
+.right-op-panel a.op-do-collection{background-position: 16px -960px}
+.right-op-panel a.op-do-collection:hover{background-position: -35px -960px}
+.right-op-panel a.op-go-top{background-position: 16px -1010px}
+.right-op-panel a.op-go-top:hover{background-position: -35px -1010px}
+
+.comment-title{border:1px solid #DDDEDD;border-left: none;border-right: none;padding: 10px;margin-top: 20px;color: #336A9A;font-size: 16px;}

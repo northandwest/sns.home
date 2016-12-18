@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<title>在线考试  - 不错啊</title>
+<#include "../include/common.html">
+<link rel="stylesheet" href="../resource/css/exam.css"/>
+<script src="../resource/js/exam.add.js"></script>
+</head>
+<body>
+<#include "../include/top.html">
+<div class="main">
+	<form class="u-form" id="exam-form">
+			<div class="form-item">
+				<div class="item-tit"><em>*</em>分类：</div>
+				<div class="item-input">
+					<select name="categoryId" id="categoryId" checkData="{rq:true,msg:'请选择分类'}">
+						<option value="">选择分类</option>
+						<#list categoryList as item>
+							<option value="${item.categoryId!''}">${item.name!''}</option>
+						</#list>
+					</select>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit"><em>*</em>题目内容：</div>
+				<div class="item-input">
+					<textarea name="examTitle" checkData="{rq:true,msg:'请输入考题内容'}" id="exam-title" placeholder="请输入考题"></textarea>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit"><em>*</em>答案：</div>
+				<div class="item-input" id="answer-list">
+					<div class="answer-item"><span class="letter">A:</span><input type="text" name="answer" class="check-code" placeholder="请输入答案"  checkData="{rq:true,msg:'答案内容不能为空'}">&nbsp;&nbsp;<a href="javascript:;" id="add-answer">添加答案</a><span class="info">最多可以添加10个答案</span></div>
+					<div class="answer-item"><span class="letter">B:</span><input type="text" name="answer" class="check-code" placeholder="请输入答案"  checkData="{rq:true,msg:'答案内容不能为空'}"></div>
+					<div class="answer-item"><span class="letter">C:</span><input type="text" name="answer" class="check-code" placeholder="请输入答案"  checkData="{rq:true,msg:'答案内容不能为空'}"></div>
+					<div class="answer-item"><span class="letter">D:</span><input type="text" name="answer" class="check-code" placeholder="请输入答案"  checkData="{rq:true,msg:'答案内容不能为空'}"></div>
+				
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit"><em>*</em>类型：</div>
+				<div class="item-input">
+					<#list examChooseType as item>
+						<label><input class="not-input" type="radio" value="${item.getType()}" name="chooseType" <#if item_index==0>checked="checked"</#if> /><span>${item.getDesc()}</span></label>
+					</#list>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit"><em>*</em>正确答案：</div>
+				<div class="item-input" id="right-answer-list">
+					<label><input class="not-input" type="checkbox" name="rightAnswer"/><span>A</span></label>
+					<label>&nbsp;&nbsp;<input class="not-input" type="checkbox" name="rightAnswer"/><span>B</span></label>
+					<label><input class="not-input" type="checkbox" name="rightAnswer"/><span>C</span></label>
+					<label>&nbsp;&nbsp;<input class="not-input" type="checkbox" name="rightAnswer"/><span>D</span></label>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit">答案解析：</div>
+				<div class="item-input">
+					<textarea name="analyse" id="analyse"></textarea>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit"></div>
+				<div class="item-input">
+					<a href="javascript:;" class="btn" id="post-exam">发布考题</a>
+				</div>
+				<div class="clear"></div>
+			</div>
+	</form>
+</div>
+<#include "../include/footer.html">
+</body>
+</html>

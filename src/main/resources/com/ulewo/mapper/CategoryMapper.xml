@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ulewo.mapper.CategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.ulewo.po.model.Category" >
+    <id column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="rang" property="rang" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="allow_post" property="allowPost" jdbcType="VARCHAR" />
+    <result column="show_in_bbs" property="showInBBS" jdbcType="VARCHAR" />
+    <result column="show_in_question" property="showInQuestion" jdbcType="VARCHAR" />
+    <result column="show_in_knowledge" property="showInKnowledge" jdbcType="VARCHAR" />
+    <result column="show_in_exam" property="showInExam" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="base_condition" >
+ 	 <where>
+	      <if test="null!=categoryId" >
+	        	and category_id = #{categoryId}
+	      </if>
+	      <if test="null!=pid" >
+	        	and pid = #{pid}
+	      </if>
+	      <if test="null != showInBBS">
+	        	and show_in_bbs = #{showInBBS}
+	      </if>
+	      <if test="null !=showInQuestion">
+	        	and show_in_question = #{showInQuestion}
+	      </if>
+	      <if test="null !=showInKnowledge">
+	        	and show_in_knowledge = #{showInKnowledge}
+	      </if>
+	      <if test="null != showInExam">
+	        	and show_in_exam = #{showInExam}
+	      </if>
+     </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    category_id, pid, name,description,rang,allow_post,show_in_bbs,show_in_question, show_in_knowledge,show_in_exam
+  </sql>
+ 
+  <select id="selectList" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List" /> from ulewo_category <include refid="base_condition" /> order by rang
+  </select>
+  
+  <insert id="insert" parameterType="com.ulewo.po.model.Category" >
+  	<selectKey keyProperty="categoryId" resultType="int" order="AFTER">
+      	SELECT LAST_INSERT_ID()
+    </selectKey>
+    <![CDATA[
+	    insert into ulewo_category (category_id, pid,name,description,rang,show_in_bbs,show_in_question,show_in_knowledge,show_in_exam,allow_post)
+	    values (#{categoryId,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, 
+	      #{name,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},#{rang,jdbcType=INTEGER}, 
+	      #{showInBBS,jdbcType=VARCHAR}, #{showInQuestion,jdbcType=VARCHAR}, 
+	      #{showInKnowledge,jdbcType=VARCHAR},#{showInExam,jdbcType=VARCHAR},#{allowPost,jdbcType=VARCHAR})
+	    ON DUPLICATE KEY UPDATE name = #{name,jdbcType=VARCHAR},description = #{description,jdbcType=VARCHAR},rang = #{rang,jdbcType=INTEGER},show_in_bbs = #{showInBBS,jdbcType=VARCHAR}
+	    ,show_in_question = #{showInQuestion,jdbcType=VARCHAR},show_in_knowledge = #{showInKnowledge,jdbcType=VARCHAR}
+	    ,show_in_exam = #{showInExam,jdbcType=VARCHAR},allow_post = #{allowPost,jdbcType=VARCHAR}
+    ]]>
+  </insert>
+  
+  <select id="selectCategory4TopicCount" resultMap="BaseResultMap">
+      <![CDATA[
+        select c.*,t.* from ulewo_category c left JOIN (select count(1) count,category_id ,(select count(1) from ulewo_topic t where t.category_id = c.category_id and  create_time >=str_to_date('${startDate} 00:00:00', '%Y-%m-%d %H:%i:%s') and create_time <=str_to_date('${endDate} 23:59:59', '%Y-%m-%d %H:%i:%s')) todayCount from ulewo_topic c group by category_id)t on c.category_id = t.category_id
+        order by c.rang
+      ]]>
+   </select>
+   
+   <delete id="delete">
+   		delete from ulewo_category where category_id = #{categoryId} or pid = #{categoryId}
+   </delete>
+</mapper>

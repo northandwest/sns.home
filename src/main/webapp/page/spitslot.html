@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<title>吐槽   - 不错啊</title>
+<#include "include/common.html">
+<link rel="stylesheet" href="../resource/webuploader/webuploader.css"/>
+<link rel="stylesheet" href="../resource/css/spitslot.css"/>
+<script src="../resource/webuploader/webuploader.min.js"></script>
+<script src="../resource/js/spitslotitem.js"></script>
+<style type="text/css">
+/*头像旋转*/
+.photo_rotate{
+
+-webkit-transition: 0.8s;
+-webkit-transition: -webkit-transform 0.8s ease-out;
+transition: transform 0.8s ease-out;/*变化时间设置为0.8秒(变化动作即为下面的图像旋转360读）*/
+-moz-transition: -moz-transform 0.8s ease-out;
+}
+.photo_rotate:hover{/*设置鼠标悬浮在头像时的CSS样式*/
+box-shadow: 0 0 10px #fff; rgba(255,255,255,.6), inset 0 0 20px rgba(255,255,255,1);
+-webkit-box-shadow: 0 0 10px #fff; rgba(255,255,255,.6), inset 0 0 20px rgba(255,255,255,1);
+transform: rotateZ(360deg);/*图像旋转360度*/
+-webkit-transform: rotateZ(360deg);
+-moz-transform: rotateZ(360deg);
+}
+</style>
+</head>
+<body>
+<#include "include/top.html">
+<div class="main">
+	<div class="left">
+		<div class="send-spit">
+			<div class="send-spit-input">
+				<textarea placeholder="今天你吐槽了吗？" id="spit-slot-area"></textarea>
+			</div>
+			<div class="send-spit-btn">
+				<a href="javascript:;" id="post-btn">
+					<span>发表</span>
+					<span>吐槽</span>
+				</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<#if Session["session_user_key"]??>
+			<div class="send-spit-op">
+				<a href="javascript:;" title="@好友" id="op-at"><i class="icon icon-op-at"></i></a>
+				<a href="javascript:;" title="插入表情" id="op-emotion"><i class="icon icon-op-emotion"></i></a>
+				<!-- <a href="javascript:;" title="插入音乐" class="op-music"><i class="icon icon-op-music"></i></a> -->
+				<a href="javascript:;" title="插入图片" class="op-img" id="upload-image"><i class="icon icon-op-img"></i></a>
+				<span class="loading"><img src="${absolutePath}/resource/images/loading.gif"/></span>
+				<span class="img-info">最多可以上传3张图片</span>
+			</div>
+		 </#if>
+		<div id="musicCon"></div>
+		<div id="image-con"></div>
+		<div id="spit-slot-list">
+		</div>
+	</div>
+	<div class="right">
+		<div class="active-user-tit">活跃用户</div>
+		<div class="active-user-con">
+			<ul>
+				<#list list as item>
+					<li>
+						<a href="${absolutePath}/user/${item.userId?c}">
+							<img src="//static.bucuoa.com/upload/${item.userIcon!''}" class="photo_rotate"/>
+							<span>${item.userName!''}</span>
+						</a>
+					</li>
+				</#list>
+			</ul>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<script src="../resource/js/spitslot.js"></script>
+<#include "include/footer.html">
+</body>
+</html>

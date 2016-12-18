@@ -1,0 +1,60 @@
+<#assign  p=JspTaglibs["/WEB-INF/tlds/pager.tld"]/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>${user.userName!''}的吐槽 - 不错啊</title>
+<meta charset="UTF-8"></meta>
+<#include "../include/common.html">
+<link rel="stylesheet" href="${absolutePath}/resource/css/user.usercenter.css"/>
+<script type="text/javascript" src="${absolutePath}/resource/js/spitslotitem.js"></script>
+
+</head>
+<body>
+<#include "../include/top.html">
+<div class="main">
+	<div class="user-center-bg">
+		<img src="${absolutePath}/resource/images/${user.userBg}"></img>
+		<div class="user-home-icon"><img src="${absolutePath}/upload/${user.userIcon}"></div>
+	</div>
+	<div class="main-home">
+		<div class="left">
+			<#include "left.html">
+		</div>
+		<div class="right">
+			<div class="user-home-tag">
+				<ul class="tag"  id="tag">
+					<li type="spitslot" class="active"><a href="${absolutePath}/user/${user.userId}#spitslot">吐槽</a></li>
+				<!-- 	<li type="topic"><a href="${absolutePath}/user/${user.userId}#topic" >讨论</a></li>
+					<li type="ask"><a href="${absolutePath}/user/${user.userId}#ask">问答</a></li> -->
+					<li type="knowledge"><a href="${absolutePath}/user/${user.userId}#knowledge">文章</a></li>
+					<li type="blog"><a href="${absolutePath}/user/${user.userId}#blog">博客</a></li>
+					<li type="fans"><a href="${absolutePath}/user/${user.userId}#fans">Ta的粉丝</a></li>
+					<li type="focus"><a href="${absolutePath}/user/${user.userId}#focus">Ta关注的人</a></li>
+				</ul>
+			</div>
+			<div id="spit-slot-list">
+				
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<#include "../include/footer.html">
+<script type="text/javascript">
+$(function(){
+    loadSpitSlot();
+});
+function loadSpitSlot() {
+    $('<div id="loading"> <div class="loading-con"><img src="' + ulewo.absolutePath + '/resource/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo($("#spit-slot-list"));
+    ulewo.ajaxRequest({
+	url : ulewo.absolutePath+"/user/loadSpitSlotDetail", data : {
+	    id : ${id!''},userId:${user.userId}
+	}, showLoad : false, fun : function(res) {
+	    $("#loading").remove();
+	    new SpitSlotItem(res.data,true).appendTo($("#spit-slot-list"));
+	}
+    });
+}
+</script>
+</body>
+</html>

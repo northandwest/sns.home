@@ -1,0 +1,15 @@
+.part-title{border-bottom:1px solid #DDDDD9;text-align:left;padding:5px 5px 10px 10px;font-weight:400;font-size:18px;}
+
+#source{margin-top: 10px}
+#source div{margin-top: 5px;}
+#source span{font-weight: bold;padding: 0px 5px;}
+
+.about-part-con{margin-top: 10px;}
+.faq-title{font-weight: bold;font-size: 16px;margin-top:10px;}
+.faq-detail{margin-top: 2px;}
+.about-main-tit{font-size: 16px;}
+.about-part{float: left;margin-right: 30px;width: 330px;margin-top: 20px;height: 80px;}
+.about-part-list{margin-top: 10px;}
+.about-part-tit{font-weight: bolder;font-size: 20px;}
+.about-part-d{margin-top: 5px;color: #666}
+.source-code span{font-weight: bold;display: inline-block;padding-right: 10px; margin-top: 10px;}

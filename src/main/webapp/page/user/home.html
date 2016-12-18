@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<title>${user.userName!''}的个人主页   - 不错啊</title>
+<#include "../include/common.html">
+<script type="text/javascript">
+ulewo.usercenter={
+	userId:${user.userId}
+}
+</script>
+<link rel="stylesheet" href="${absolutePath}/resource/css/user.usercenter.css"/>
+<script language="javascript" type="text/javascript" src="${absolutePath}/resource/js/spitslotitem.js"></script>
+<script language="javascript" type="text/javascript" src="${absolutePath}/resource/js/user.usercenter.js"></script>
+</head>
+<body>
+<#include "../include/top.html">
+<div class="main">
+	<div class="user-center-bg">
+		<img src="${absolutePath}/resource/images/${user.userBg!'defbg/bg3.jpg'}"></img>
+		<div class="user-home-icon"><img src="//static.bucuoa.com/upload/${user.userIcon!'avatars/10720.jpg'}" /></div>
+	</div>
+	<div class="main-home">
+		<div class="left">
+			<#include "left.html">
+		</div>
+		<div class="right">
+			<div class="user-home-tag">
+				<ul class="tag"  id="tag">
+					<li class="active"  type="spitslot"><a href="${absolutePath}/user/${user.userId}#spitslot">吐槽</a></li>
+			<!-- 		<li type="topic"><a href="javascript:void(0)" >讨论</a></li>
+					<li type="ask"><a href="javascript:void(0)">问答</a></li> -->
+					<li type="knowledge"><a href="${absolutePath}/user/${user.userId}#knowledge">文章</a></li>
+					<li type="blog"><a href="${absolutePath}/user/${user.userId}#blog">博客</a></li>
+					<li type="fans"><a href="${absolutePath}/user/${user.userId}#fans">Ta的粉丝</a></li>
+					<li type="focus"><a href="${absolutePath}/user/${user.userId}#focus">Ta关注的人</a></li>
+				</ul>
+			</div>
+			<!-- 吐槽 -->
+			<div class="tag-content">
+				
+			</div>
+			<!-- 讨论 
+			<div class="tag-content">
+				<div id="topic-pager-top"></div>
+				<div id="topic-content"></div>
+				<div id="topic-pager-footer"></div>
+			</div>-->
+			<!-- 问答
+			<div class="tag-content">
+				<div id="ask-pager-top"></div>
+				<div id="ask-content"></div>
+				<div id="ask-pager-footer"></div>
+			</div> -->
+			<!-- 文章 -->
+			<div class="tag-content">
+				<div id="knowledge-pager-top"></div>
+				<div id="knowledge-content"></div>
+				<div id="knowledge-pager-footer"></div>
+			</div>
+			<div class="tag-content"></div>
+			<!-- Ta的粉丝 -->
+			<div class="tag-content">
+				<div class="user-con-s-f">
+					<ul id="fans-content" >
+					
+					</ul>
+				</div>
+			</div>
+			<!-- Ta关注的人 -->
+			<div class="tag-content">
+				<div class="user-con-s-f">
+					<ul id="focus-content" >
+					
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<#include "../include/footer.html">
+</body>
+</html>

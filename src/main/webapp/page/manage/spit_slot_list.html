@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<#include "../include/common.html">
+<script language="javascript" type="text/javascript" src="${absolutePath}/resource/datepicker/WdatePicker.js"></script>
+<link rel="stylesheet" href="${absolutePath}/resource/css/manager.public.css"/>
+<script src="${absolutePath}/resource/js/manager.spitslot.list.js"></script>
+<title>吐槽管理</title>
+</head>
+<body>
+<#include "top.html">
+<div class="main">
+	<#include "left.html">
+	<div class="main-right">
+		<div class="navigation"><span>吐槽管理</span>&nbsp;&gt;&nbsp;<span>吐槽列表</span></div>
+		<div class="search">
+		    <form id="searchform" onsubmit="return false">
+			  <table class="table">
+			    <tbody>
+				  <tr>
+				  	<td class="tit-left">作者</td>
+			        <td class="tit">
+						<input class="input input-small" type="text" name="userName">
+					</td>
+			        <td class="tit-left">创建时间</td>
+			        <td class="tit">
+						<input class="input input-small" onclick="WdatePicker()" type="text" name="startTime" value="" readonly="readonly">&nbsp;-&nbsp;
+						<input class="input input-small" onclick="WdatePicker()" type="text" name="endTime" value="" readonly="readonly">
+					</td>
+			        <td class="tit"><a href="javascript:search()" class="btn">查询</a></td>
+			      </tr>
+			  </tbody>
+			  </table>
+			</form>
+		</div>
+		<div class="grid-list">
+			<table class="table table-list hover">
+				<thead>
+					<th>吐槽内容</th>
+					<th width="150">发布者</th>
+					<th width="50">评论</th>
+					<th width="150">创建时间</th>
+					<th width="50">操作</th>
+				</thead>
+				<tbody id="data-list">
+					
+				</tbody>
+			</table>
+			<div id="pager">
+				
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

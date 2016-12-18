@@ -1,0 +1,294 @@
+<div class="header" id="header">
+	<div class="header-main">
+		<div class="logo">
+			<a href="http://www.bucuoa.com">
+				<span class="name">不错啊</span>
+				<span class="net">www.bucuoa.com</span>
+			</a>
+		</div>
+		<div class="search">
+		     <form action="${absolutePath}/search" method="post" id="searchForm">
+			     <div class="search-select">
+	                <select name="searchType" id="searchType">
+	                    <option value="K" <#if searchType??&&searchType=="K">selected="selected"</#if> >知识库</option>
+	                    <option value="T" <#if searchType??&&searchType=="T">selected="selected"</#if>>帖子</option>
+	                    <option value="Z" <#if searchType??&&searchType=="Z">selected="selected"</#if>>问答</option>
+	                    <option value="Z" <#if searchType??&&searchType=="Z">selected="selected"</#if>>知识</option>
+	                    <option value="B" <#if searchType??&&searchType=="B">selected="selected"</#if>>博客</option>
+	                </select>
+	            </div>
+	            <div class="search-input">
+	                <input type="text" name="keyword" id="search-keyword" value="${keyword!''}">
+	            </div>
+	            <a href="javascript:;" class="search-btn" id="search-btn">搜&nbsp;&nbsp;索</a>
+		     </form>
+		</div>
+		<div class="header-user-info">
+			<#if Session["session_user_key"]??>
+	        	 	 <div class="login" id="login-info">
+				         <span class="user-icon"><img  src="${absolutePath}/resource/images/defusericon/usericon1.png"></span>
+				         <span class="welcome">欢迎回来，</span><a href="${absolutePath}/user/${session_user_key.userId}">${session_user_key.userName}</a>
+		   			 </div>
+	   			 	<div id="user-info-dialog">
+			         	<div>
+			         		<div class="d-user-icon"><a href="${absolutePath}/user/${session_user_key.userId}"><img src="//static.bucuoa.com/upload/${session_user_key.userIcon}"></a></div>
+			         		<div class="d-user-info">
+			         			<div class="d-user-info-t">${session_user_key.userName}</div>
+			         			<div class="d-user-info-t">关注：<span id="focus-count" class="user-count-info"></span></div>
+			         			<div class="d-user-info-t">粉丝：<span id="fans-count" class="user-count-info"></span></div>
+			         			<div class="d-user-info-t">积分：<span id="mark-count" class="user-count-info"></span></div>
+			         			<div class="d-user-info-t">
+			         				<a href="javascript:;" class="btn small-btn" id="logout-btn">退出</a>
+			         				<a href="${absolutePath}/admin/update_user.action" class="btn small-btn">后台管理</a>
+			         			</div>
+			         		</div>
+			         		<div class="clear"></div>
+			         	</div>
+			         	<div class="d-title">个人设置</div>
+			         	<div>
+			         		<a href="${absolutePath}/user/${session_user_key.userId}" class="info-d">个人中心</a>
+			         		<a href="${absolutePath}/admin/message_list.action" class="info-d">我的消息</a>
+			         		<a href="${absolutePath}/admin/update_user.action" class="info-d">修改个人信息</a>
+			         		<a href="${absolutePath}/admin/change_user_icon.action" class="info-d">修改头像</a>
+			         		<a href="${absolutePath}/admin/add_blog.action" class="info-d">写博客</a>
+			         		<a href="${absolutePath}/admin/collection_list.action?articleType=T" class="info-d">我的收藏</a>
+			         	</div>
+        			 </div>
+	        	<#else>
+	        		<div class="no-login">
+				        <span class="def-icon"><img  src="${absolutePath}/resource/images/defusericon/usericon1.png"></span>
+		                <a href="//ucenter.bucuoa.com/login?redirectUrl=http://www.bucuoa.com&loginCenter=http://www.bucuoa.com/autoLogin">登录</a><span class="line">
+		                |</span><a href="//ucenter.bucuoa.com/register?redirectUrl=http://www.bucuoa.com&loginCenter=http://www.bucuoa.com/autoLogin">注册</a>
+		    		</div>
+	        </#if>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<div class="banner">
+	<div class="banner-menu">
+		<ul>
+			<li><a href="${absolutePath}">首页</a></li>
+			<!-- <li><a href="//group.bucuoa.com/group/all">圈组</a></li> -->
+			<li><a href="${absolutePath}/spitslot">唠嗑</a></li>
+			<li><a href="${absolutePath}/signIn">签到</a></li>
+			<li><a href="${absolutePath}/knowledge">文章</a></li>
+			
+<!-- 			
+			<li><a href="${absolutePath}/spitslot">脚印</a></li>
+			<li><a href="${absolutePath}/knowledge">知识库</a></li>
+		    <li><a href="${absolutePath}/bbs">广场</a></li>
+		    <li><a href="${absolutePath}/ask">问答</a></li> -->	
+			<li><a href="${absolutePath}/blog">博客</a></li>
+		    <li><a href="${absolutePath}/exam">面试宝典</a></li> 	
+ 		</ul>
+		<#if Session["session_user_key"]??>
+			<div class="message">
+			      <a href="javascript:;" id="show-message-btn">你有<span id="message-count" class="message-count">0</span>条未读消息&nbsp;&nbsp;<i class="icon icon-message"></i></a>
+			</div>
+			<div id="message-dialog">
+			  <div id="message-data-list"></div>
+			  <div id="message-load"></div>
+			  <div id="message-op">
+			      <a href="${absolutePath}/admin/message_list.action" class="btn">进入消息中心</a>
+			  </div>
+			</div>
+		</#if>
+	</div>
+</div>
+<script>
+/**
+ * 菜单模块选中
+ */
+ 
+ ulewo.topUrl = {
+		    loadMessage:ulewo.absolutePath+"/admin/load_user_message_list.action",
+		    loadMessageCount:ulewo.absolutePath+"/admin/load_user_message_count.action",
+		    loadUserInfo:ulewo.absolutePath+"/user/load_user_info.action"
+}
+ 
+ $(function(){
+     $("#logout-btn").click(function(){
+	    ulewo.ajaxRequest({
+			url : ulewo.absolutePath+"/logout",fun : function(res) {
+			    location.reload(true);
+			}
+	    });
+     });
+     
+     $("#login-info").mouseenter(function(){
+	    showUserInfoDialog();
+	    if($("#mark-count").text()==""){
+			ulewo.ajaxRequest({
+			           url : ulewo.topUrl.loadUserInfo,
+			           showLoad : false,
+			           fun : function(response) {
+			                var user = response.data;
+			        	 	$("#focus-count").text(user.focusCount);
+			        	 	$("#fans-count").text(user.fansCount);
+			        	 	$("#mark-count").text(user.mark);
+			           }
+			  })
+	    }
+
+	 });
+	     
+     $("#login-info").mouseleave(function(){
+	    ulewo.showdialog_timeout = setTimeout(function(){
+			hideUserInfoDialog();
+	    },1)
+     });
+     
+     $("#user-info-dialog").mouseenter(function(){
+	    clearTimeout(ulewo.showdialog_timeout)
+	    $("#user-info-dialog").show();
+	 });
+     
+     $("#user-info-dialog").mouseleave(function(){
+		 hideUserInfoDialog();
+	 });
+     ulewo.menus = [ulewo.absolutePath+"/","spitslot","signIn","knowledge","blog"];
+     ulewo.ignoreMenus = ["login","register"];
+     for(var i=0,_len=ulewo.ignoreMenus.length,item;i<_len,item=ulewo.ignoreMenus[i];i++){
+	 	if(ulewo.curUrl.indexOf(item)!=-1){
+	     	 return;
+	    }
+     }
+     for(var i = 0, _len = ulewo.menus.length,item;i < _len,item = ulewo.menus[i]; i ++){
+	 	
+         //首页单独处理
+         if(item == ulewo.curUrl && ulewo.curUrl.indexOf("user") == -1){
+     		$(".banner-menu ul li").eq(0).addClass("active");
+     		break;
+         }
+         if(ulewo.curUrl.indexOf(item) != -1 && i > 0 && ulewo.curUrl.indexOf("user") == -1){
+     	    $(".banner-menu ul li").eq(i).addClass("active");
+     	    break;
+         }
+     }
+     
+     if(ulewo.user.userId!=""){
+    	  getMessageCount();
+     }
+   
+     
+     $("#show-message-btn").click(function(event){
+         event.stopPropagation();
+         if(ulewo.user.userId!=""){
+        	 showMessageList();
+         }
+     });
+     
+     $("#message-dialog").click(function(event){
+    	 event.stopPropagation();
+     });
+     
+     $(document).click(function(){
+         $("#message-dialog").hide();
+     });
+     
+     $("#search-btn").click(function(){
+    	 var keyword = $.trim($("#search-keyword").val());
+    	 if(keyword==""){
+             ulewo.tipMsg({
+                    type : "warn", content : "搜索内容不能为空", timeout : 1500
+                });
+             return;
+         }
+         if(keyword.lenth>20){
+             ulewo.tipMsg({
+                 type : "warn", content : "搜索内容不能超过20个字符", timeout : 1500
+             });
+             return;
+         }
+    	 if(ulewo.curUrl.indexOf("search")==-1){
+    		 searchForm.submit();
+    	 }else{
+    		 searchData();
+    	 }
+     });
+ })
+ 
+//显示用户信息
+function showUserInfoDialog(){
+     $("#user-info-dialog").show();
+     $("#login-info").addClass("active");
+}
+//隐藏用户信息
+function hideUserInfoDialog(){
+    $("#user-info-dialog").hide();
+    $("#login-info").removeClass("active");
+}
+
+//获取消息数量
+function getMessageCount(){
+	   ulewo.ajaxRequest({
+           url : ulewo.topUrl.loadMessageCount,
+           showLoad : false,
+           data:{status:0},
+           fun : function(response) {
+        	   var count = response.data
+        	   if(count>0){
+        		   $("#message-count").text(count);
+        		   setInterval(function(){
+        			   if($("#message-count").hasClass("high")){
+        				   $("#message-count").removeClass("high");
+        			   }else{
+        				   $("#message-count").addClass("high");
+        			   }
+        		   },500)
+        	   }
+           }
+       })
+}
+//显示消息框
+function showMessageList(){
+	$("#message-dialog").show();
+	if($("#message-data-list").children().length==0&&!ulewo.isLoading){
+		loadMessage();
+	}
+}
+
+function MessageItem(data){
+	var item = $("<div class='message-item'></div>");
+	$("<div>"+data.description+"</div>").appendTo(item);
+	var op = $("<div class='message-op'></div>").appendTo(item);
+	$("<span class='time'>发送："+data.createTime+"</span>").appendTo(op);
+	if(data.url!=""){
+	    $('<a href="'+ulewo.absolutePath+'/admin/readMessage.action?id='+data.id+'" class="message-detail" class="read-message" url="'+data.url+'" messageId="'+data.id+'">查看详情</a>').appendTo(op);
+	}
+	return item;
+}
+
+function loadMessage(page){
+	ulewo.isLoading = true;
+	ulewo.messagePageNo = page;
+    $("#load-more-message").remove();
+    $('<div id="loading-message" class="loading"> <div class="loading-con"><img src="' + ulewo.absolutePath + '/resource/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo($("#message-load"));
+    ulewo.ajaxRequest({
+    	showLoad : false,
+        url :ulewo.topUrl.loadMessage,
+        data:{status:0},
+        fun : function(res) {
+        	ulewo.isLoading = false;
+        	$("#loading-message").remove();
+            var list = res.data.list;
+            var simplePage = res.data.page;
+            if(simplePage.countTotal==0){
+            	$("<div class='no-data'>没有消息</div>").appendTo($("#message-data-list"));
+            }else{
+            	for (var i = 0, _len = list.length, data; i < _len, data = list[i]; i++) {
+                    new MessageItem(data).appendTo($("#message-data-list"));
+                }
+	            if (simplePage.pageTotal > simplePage.page) {
+	                 $('<div id="load-more-message" class="load-more"><a href="javascript:;">⇓加载更多</a></div>').appendTo($("#message-load"));
+	            }
+	            if(simplePage.page==1){
+	            	$("<input type='checkbox' class='not-input' id='select-all-message'/><a href='javascript:;' id='mark-message-batch'>标记为已读</a>&nbsp;&nbsp;&nbsp;<a href='javascript:;' id='del-message-batch'>删除</a>")
+	            }
+            }
+            
+        }
+    })
+}
+</script>

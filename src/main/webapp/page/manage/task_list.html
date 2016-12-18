@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<#include "../include/common.html">
+<script language="javascript" type="text/javascript" src="${absolutePath}/resource/datepicker/WdatePicker.js"></script>
+<link rel="stylesheet" href="${absolutePath}/resource/css/manager.public.css"/>
+<script src="${absolutePath}/resource/js/manager.task.list.js"></script>
+<title>定时任务管理</title>
+</head>
+<body>
+<#include "top.html">
+<div class="main">
+	<#include "left.html">
+	<div class="main-right">
+		<div class="navigation"><span>系统设置</span>&nbsp;&gt;&nbsp;<span>定时任务列表</span></div>
+		<div class="search">
+			<a title="新建定时任务" href="${absolutePath}/manage/task/task_2add" class="btn btn-color first">+新建定时任务</a>
+		</div>
+		<div class="grid-list">
+	        <table class="table table-list hover">
+                   <tr>
+					  	<th width="200">类名</th>
+						<th width=200>方法名</th>
+						<th width=200>描述</th>
+						<th width="150">调度时间</th>
+						<th width="50">状态</th>
+						<th width="150">最后更新时间</th>
+						<th width=100>操作</th>
+		 	 		</tr>
+		 	 		<tbody id="pager_content">
+		  			
+		  			</tbody>
+            </table>
+  			<div id="pager"  class="pagination"></div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<title>在线考试 - 有乐窝</title>
+<#include "../include/common.html">
+<link rel="stylesheet" href="../resource/css/exam.css"/>
+<script src="../resource/js/exam.js"></script>
+</head>
+<body>
+<#include "../include/top.html">
+<div class="main">
+	<div class="exam-op">
+		<a href="/exam/post_exam.action" class="btn">发布考题</a>
+		<a href="javascript:;" class="btn" id="do-exam">进入考场</a>
+		<a href="/exam/do_learn.action" class="btn" id="do-exam">学习</a>
+		<div class="exam-form">
+			<form action="/exam/do_exam.action" method="get" id="do-exam-form">
+				<label><input type="radio" class="not-input" checked="checked" name="categoryId" value="0"/><span>全部考题</span></label>
+				<#list categoryList as item>
+				   
+					   <label><input type="radio" class="not-input" name="categoryId" value="${item.categoryId!''}"/><span>${item.name!''}</span></label>
+				    <#list item.children as sub> </#list>
+				</#list>
+			</form>
+		</div>
+	</div>
+	<div class="part-title">默默的发题人</div>
+	<div id="post-user-list">
+	
+	</div>
+	<div id="pager"></div>
+</div>
+<#include "../include/footer.html">
+</body>
+</html>

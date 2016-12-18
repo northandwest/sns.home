@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<#include "../include/common.html">
+<link rel="stylesheet" href="${absolutePath}/resource/css/admin.user.css"/>
+<title>修改密码</title>
+</head>
+<body>
+<#include "top.html">
+<div class="main">
+	<#include "left.html">
+	<div class="main-right">
+		<div class="navigation"><span>个人信息管理</span>&nbsp;&gt;&nbsp;<span>修改密码</span></div>
+		<form class="u-form" autocomplete="off" id="post-form">
+		<input type="hidden" id="richContent" name="richContent"/>
+		<input type="hidden"  name="blogId" value="${(blog.blogId)!''}" id="blog-id"/>
+			<div class="form-item">
+                <div class="item-tit">原始密码：</div>
+                <div class="item-input"><input type="password" class="l-length" name="oldPwd" placeholder="密码长度6-16位字符，由数字、字母组成" checkData="{min:6,max:16,reg:'common',rq:true,msg:'请输入正确的密码'}"></div>
+                <div class="clear"></div>
+            </div>
+			<div class="form-item">
+                <div class="item-tit">新密码：</div>
+                <div class="item-input"><input type="password" class="l-length" name="newPwd" placeholder="密码长度6-16位字符，由数字、字母组成" checkData="{min:6,max:16,reg:'common',rq:true,msg:'请输入正确的密码'}"></div>
+                <div class="clear"></div>
+            </div>
+            <div class="form-item">
+                <div class="item-tit">确认新密码：</div>
+                <div class="item-input"><input type="password" class="l-length" name="reNewPwd" placeholder="请再次输入密码" checkData="{rq:true}"></div>
+                <div class="clear"></div>
+            </div>
+			<div class="form-item">
+				<div class="item-tit"></div>
+				<div class="item-input"><a href="javascript:void(0)" id="post-btn" class="btn">&nbsp;&nbsp;修改密码&nbsp;&nbsp;</a></div>
+				<div class="clear"></div>
+			</div>
+		</form>
+	</div>
+</div>
+<script src="${absolutePath}/resource/js/admin.user.changepwd.js"></script>
+</body>
+</html>

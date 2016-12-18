@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ulewo.mapper.AskMapper" >
+  <resultMap id="base_result_map" type="com.ulewo.po.model.Ask" >
+    <id column="ask_id" property="askId" jdbcType="INTEGER" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="name" property="categoryName" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="ask_image" property="askImage" jdbcType="VARCHAR" />
+    <result column="ask_image_thum" property="askImageThum" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_icon" property="userIcon" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="read_count" property="readCount" jdbcType="INTEGER" />
+     <result column="comment_count" property="commentCount" jdbcType="INTEGER" />
+    <result column="like_count" property="likeCount" jdbcType="INTEGER" />
+    <result column="collection_count" property="collectionCount" jdbcType="INTEGER" />
+    <result column="mark" property="mark" jdbcType="INTEGER" />
+    <result column="best_answer_id" property="bestAnswerId" jdbcType="INTEGER" />
+    <result column="slove_type" property="sloveType" jdbcType="INTEGER" typeHandler="com.ulewo.po.handler.SloveTypeHandler"/>
+  </resultMap>
+  <sql id="base_column_list" >
+    ask_id,category_id, title,summary,ask_image,ask_image_thum,user_id,user_name,user_icon,create_time,read_count,comment_count,like_count,collection_count,mark,best_answer_id,slove_type
+  </sql>
+  <sql id="base_condition" >
+ 	  <where>
+ 	    <if test="null!=askId" >
+            and ask_id = #{askId,jdbcType=INTEGER}
+        </if>
+        <if test="null!=categoryId" >
+            and category_id = #{categoryId,jdbcType=INTEGER}
+        </if>
+        <if test="sloveType!=null">
+            and slove_type = #{sloveType.type}
+        </if>
+        <if test="null!=userId">
+            and user_id = #{userId,jdbcType=DECIMAL}
+        </if>
+        <if test="startDate!=null">
+ 				<![CDATA[
+ 				  	and create_time >=str_to_date('${startDate} 00:00:00', '%Y-%m-%d %H:%i:%s')
+ 				]]>
+ 			</if>
+ 			<if test="endDate!=null">
+ 				<![CDATA[
+ 				  	and create_time <=str_to_date('${endDate} 23:59:59', '%Y-%m-%d %H:%i:%s')
+ 				]]>
+ 		</if>
+ 		<if test="userName!=null and ''!=userName">
+                and user_name like '%${userName}%'
+        </if>
+ 	  </where>
+  </sql>
+  
+  <select id="selectList" resultMap="base_result_map">
+      select <include refid="base_column_list"/> 
+         <if test="showContent">,content</if>
+      from ulewo_ask <include refid="base_condition"/>
+       <if test="orderBy!=null">
+           order by ${orderBy.orderBy}
+       </if>
+       <if test="page!=null">
+            limit #{page.start},#{page.end}
+       </if>
+  </select>
+  
+  <select id="selectCount" resultType="java.lang.Integer">
+     select count(1) from ulewo_ask <include refid="base_condition"/>
+  </select>
+  
+  <select id="selectTopUsers" resultMap="base_result_map">
+  	select best_answer_user_id user_id,count(1) sloveCount,max(best_answer_user_name) user_name  
+  	from ulewo_ask b where  slove_type = 1 group by best_answer_user_id order by sloveCount desc limit 0,#{topCount}
+  </select>
+  
+  <insert id="insert" parameterType="com.ulewo.po.model.Ask" >
+  	<selectKey keyProperty="askId" resultType="int" order="AFTER">
+      	SELECT LAST_INSERT_ID()
+    </selectKey>
+      <![CDATA[
+		insert into ulewo_ask (title, p_category_id,category_id,content,summary,user_id,user_name,user_icon,create_time,ask_image,ask_image_thum,mark)values
+		    (#{title,jdbcType=VARCHAR}, #{pCategoryId,jdbcType=INTEGER},#{categoryId,jdbcType=INTEGER},#{content,jdbcType=LONGVARCHAR},#{summary,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},#{userName,jdbcType=VARCHAR},#{userIcon,jdbcType=VARCHAR},
+		    #{createTime,jdbcType=TIMESTAMP}, #{askImage,jdbcType=VARCHAR},#{askImageThum,jdbcType=VARCHAR},#{mark,jdbcType=DECIMAL})
+        ]]>
+  </insert>
+  
+  <update id="updateBestAnswer">
+     update ulewo_ask set best_answer_id = #{bestAnswerId},best_answer_user_id = #{bestAnswerUserId},best_answer_user_name = #{bestAnswerUserName},slove_type = #{sloveType.type}
+     where ask_id = #{askId} and user_id = #{userId}
+  </update>
+  
+   <update id="updateInfoCount">
+         update ulewo_ask
+         <set>
+           <if test="addReadCount">
+                read_count = read_count+#{count}
+            </if>
+            <if test="addLikeCount">
+                like_count = like_count+#{count}
+            </if>
+            <if test="addCommentCount">
+                comment_count = comment_count+#{count}
+            </if>
+            <if test="addCollectionCount">
+                collection_count = collection_count+#{count}
+            </if>
+         </set>
+         where  ask_id = #{topicId}
+   </update>
+  
+   <delete id="deleteBatch">
+        delete from ulewo_ask where ask_id in <foreach collection="ids" item="item" separator="," open="(" close=")"> #{item} </foreach>
+   </delete>
+</mapper>

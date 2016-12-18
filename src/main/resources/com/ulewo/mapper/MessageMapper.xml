@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ulewo.mapper.MessageMapper" >
+  <resultMap id="base_result_map" type="com.ulewo.po.model.Message" >
+    <id column="id" property="id"/>
+    <result column="received_user_id" property="receivedUserId" />
+    <result column="create_time" property="createTime"/>
+    <result column="description" property="description"/>
+    <result column="url" property="url"/>
+    <result column="status" property="status"/>
+  </resultMap>
+  <sql id="base_column_list" >
+  		id,received_user_id,create_time,description,url,status
+  </sql>
+  <sql id="base_condition" >
+ 	 <where>
+ 		 <if test="null!=receivedUserId">
+	        and received_user_id = #{receivedUserId}
+	     </if>
+	     <if test="null!=status">
+	        and status = #{status.type}
+	     </if>
+	     <if test="null!=id">
+	        and id = #{id}
+	     </if>
+	      <if test="null!=startTime and ''!=startTime">
+             <![CDATA[
+                and create_time >='${startTime} 00:00:00'
+             ]]>
+          </if>
+          <if test="null!=endTime and ''!=endTime">
+              <![CDATA[
+                and create_time <= '${endTime} 23:59:59'
+              ]]>
+          </if>
+ 	 </where>
+  </sql>
+  
+  <insert id="insertBatch" parameterType="java.util.List">
+	insert into ulewo_message(received_user_id,create_time,description,url)values
+		<foreach collection="list"  item="item" separator=",">
+			(#{item.receivedUserId},#{item.createTime},#{item.description},#{item.url})
+		</foreach>
+  </insert>
+  
+  <select id="selectList" resultMap="base_result_map">
+  	select <include refid="base_column_list"/> from ulewo_message
+  	<include refid="base_condition"/>
+     order by status asc,create_time desc
+    <if test="page!=null">
+         limit #{page.start},#{page.end}
+    </if>
+  </select>
+ 
+  <select id="selectCount" resultType="java.lang.Integer">
+  	select count(1) from ulewo_message
+  	<include refid="base_condition"/>
+  </select>
+  
+  <update id="updateBatch" parameterType="com.ulewo.po.model.Message" >
+    update ulewo_message
+    <set >
+      <if test="status != null">
+        status = #{status.type,jdbcType=INTEGER}
+      </if>
+    </set>
+    where received_user_id = #{receivedUserId,jdbcType=INTEGER} and id in(
+    	<foreach collection="ids" separator="," item="item">
+			#{item}
+		</foreach>
+    )
+  </update>
+  
+  <delete id="deleteBatch">
+  	delete from ulewo_message  where received_user_id = #{receivedUserId,jdbcType=INTEGER} and id in(
+    	<foreach collection="ids" separator="," item="item">
+			#{item}
+		</foreach>
+    )
+  </delete>
+</mapper>

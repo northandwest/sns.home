@@ -1,0 +1,100 @@
+<#assign  p=JspTaglibs["/WEB-INF/tlds/pager.tld"]/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<title>知识库   - 不错啊</title>
+<#include "../include/common.html">
+<link rel="stylesheet" href="${absolutePath}/resource/css/knowledge.css"/>
+</head>
+<body>
+<#include "../include/top.html">
+<div class="main">
+	<div class="navigation">
+		<#if pCategory??>
+			<a href="${absolutePath}/knowledge">知识库</a>
+		</#if>
+		<#if pCategory??>
+			&nbsp;&gt;&nbsp;<a href="${absolutePath}/knowledge/pCategoryId/${pCategory.categoryId}">${pCategory.name}</a>
+		</#if>
+		<#if category??>
+			&nbsp;&gt;&nbsp;<a href="${absolutePath}/knowledge/categoryId/${category.categoryId}">${category.name}</a>
+		</#if>
+	</div>
+	<div class="left">
+		<a href="javascript:;" class="btn post-btn"><i class="icon icon-post-knowledge"></i>&nbsp;&nbsp;<span>我要投稿</span></a>
+		<div class="categories">
+			<a href="${absolutePath}/knowledge" class="all-knowledge">全部知识库</a>
+			<ul>
+				<#list categories as p>
+					<li>
+						<a href="${absolutePath}/knowledge/pCategoryId/${p.categoryId}">${p.name!''}</a>
+						<ul>
+							<#list p.children as c>
+								<li><a href="${absolutePath}/knowledge/categoryId/${c.categoryId}" <#if categoryId??&&categoryId==c.categoryId>class="active"</#if>>${c.name!''}</a></li>
+							</#list>
+							<div class="clear"></div>
+						</ul>	
+					</li>
+				</#list>
+			</ul>
+		</div>
+	</div>
+	<div class="right">
+			<div class="topic-item-list">
+				<div class="pager">
+					<@p.pager url="" countTotalStr="${result.page.countTotal?c!'0'}" pageStr="${result.page.page?c!'1'}" pageTotalStr="${result.page.pageTotal?c!'1'}"></@p.pager>
+				</div>
+			   <#if (result.page.countTotal>0)>
+			       <#list result.list as item>
+		                <div class="topic-item">
+		                	<div class="topic-item-info">
+		                		<div class="topic-item-title">
+		                			<a href="${absolutePath}/knowledge/${item.topicId?c}" class="title">${item.title!''}</a>
+		                			<span class="time">${item.showCreateTime!''}</span>
+		                			<a class="topic-cate-tag" href="${absolutePath}/knowledge/categoryId/${item.categoryId}">${item.categoryName!'全部分类'}</a>
+		                		</div>
+		                		<div class="topic-item-summary">${item.summary!''}</div>
+		                		<#if item.topicImageThumArray??>
+			                		<div class="image-thum topic-item-images">
+			                			<#list item.topicImageThumArray as img>
+			                				<a href="javascript:;" class="img"><img src="${absolutePath}/upload/${img}"></a>
+			                				<#if (img_index>=2)>
+			                					<#break>
+			                				</#if>
+			                			</#list>
+			                			<div class="clear"></div>
+			                		</div>
+		                		</#if>
+		                		<div class="topic-count-info">
+		                			<a href="${absolutePath}/user/${item.userId!''}" class="user-info"><i class="icon icon-user-name"></i><span>${item.userName!''}</span></a>
+		                			<span class="count"><i class="icon icon-read"></i><span>阅读：${item.readCount!'0'}</span></span>
+		                			<span class="count"><i class="icon icon-comment"></i><span>评论：${item.commentCount!'0'}</span></span>
+		                			<span class="count"><i class="icon icon-like"></i><span>喜欢：${item.likeCount!'0'}</span></span>
+		                			<span class="count"><i class="icon icon-collection"></i><span>收藏：${item.collectionCount!'0'}</span></span>
+		                		</div>
+		                	</div>
+		                 </div>
+		           </#list>
+		           <#else>
+		           <div class="no-data">没有知识点，赶紧投稿吧</div>
+			   </#if>
+			   <div class="pager">
+					<@p.pager url="" countTotalStr="${result.page.countTotal?c!'0'}" pageStr="${result.page.page?c!'1'}" pageTotalStr="${result.page.pageTotal?c!'1'}"></@p.pager>
+				</div>
+			</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<#include "../include/footer.html">
+<script>
+$(".post-btn").click(function(){
+    if(ulewo.user.userId==""){
+		ulewo.goLogin();
+		return;
+    }
+    document.location.href=ulewo.absolutePath+"/knowledge/post_knowledge.action";
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ulewo.mapper.TopicMapper" >
+  <resultMap id="base_result_map" type="com.ulewo.po.model.Topic" >
+    <id column="topic_id" property="topicId" jdbcType="INTEGER" />
+    <result column="topic_type" property="topicType" jdbcType="INTEGER" typeHandler="com.ulewo.po.handler.TopicTypeHandler"/>
+    <result column="p_category_id" property="pCategoryId" jdbcType="INTEGER" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="topic_image" property="topicImage" jdbcType="VARCHAR" />
+     <result column="topic_image_thum" property="topicImageThum" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_icon" property="userIcon" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_comment_time" property="lastCommentTime" jdbcType="VARCHAR" />
+    <result column="read_count" property="readCount" jdbcType="INTEGER" />
+    <result column="like_count" property="likeCount" jdbcType="INTEGER" />
+    <result column="comment_count" property="commentCount" jdbcType="INTEGER" />
+    <result column="collection_count" property="collectionCount" jdbcType="INTEGER" />
+    <result column="grade" property="grade" jdbcType="INTEGER" />
+    <result column="essence" property="essence" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <sql id="base_column_list" >
+    topic_id, topic_type,p_category_id,category_id, title,topic_image,topic_image_thum,summary, user_id,user_name,user_icon, create_time, 
+    last_comment_time, read_count,comment_count,collection_count,like_count,grade, essence
+  </sql>
+  
+  <sql id="base_condition" >
+ 		<where>
+ 			<if test="userId!=null">
+ 				and user_id = #{userId}
+ 			</if>
+ 			<if test="topicId!=null and ''!=topicId">
+ 				and topic_id = #{topicId}
+ 			</if>
+ 			<if test="categoryId!=null">
+ 				and category_id = #{categoryId}
+ 			</if>
+ 			<if test="pCategoryId!=null">
+ 				and p_category_id= #{pCategoryId}
+ 			</if>
+ 			<if test="startDate!=null">
+ 				<![CDATA[
+ 				  	and create_time >=str_to_date('${startDate} 00:00:00', '%Y-%m-%d %H:%i:%s')
+ 				]]>
+ 			</if>
+ 			<if test="endDate!=null">
+ 				<![CDATA[
+ 				  	and create_time <=str_to_date('${endDate} 23:59:59', '%Y-%m-%d %H:%i:%s')
+ 				]]>
+ 			</if>
+            <if test="userName!=null and ''!=userName">
+                and user_name like '%${userName}%'
+            </if>
+ 		</where>
+  </sql>
+  
+  <select id="selectList" resultMap="base_result_map">
+  	select <include refid="base_column_list"/> 
+  	<if test="showContent">
+  		,content
+  	</if>
+  	from ulewo_topic <include refid="base_condition"/>
+  	<if test="orderBy!=null">
+  		order by ${orderBy.orderBy}
+  	</if>
+  	<if test="page!=null">
+  	     limit #{page.start},#{page.end}
+  	</if>
+  </select>
+  
+  <select id="selectCount" resultType="java.lang.Integer">
+    select count(1) from ulewo_topic <include refid="base_condition"/>
+  </select>
+  
+  <insert id="insert" parameterType="com.ulewo.po.model.Topic">
+  	<selectKey keyProperty="topicId" resultType="int" order="AFTER">
+      	SELECT LAST_INSERT_ID()
+    </selectKey>
+    <![CDATA[
+    insert into ulewo_topic (topic_type,p_category_id,category_id,title,
+    content,summary,user_id,user_name,user_icon, create_time,last_comment_time,topic_image,topic_image_thum)
+    values (#{topicType.type,jdbcType=INTEGER},#{pCategoryId,jdbcType=INTEGER},#{categoryId,jdbcType=INTEGER},
+      #{title,jdbcType=VARCHAR},#{content,jdbcType=LONGVARCHAR},#{summary,jdbcType=LONGVARCHAR},
+      #{userId,jdbcType=INTEGER},#{userName,jdbcType=VARCHAR},#{userIcon,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastCommentTime,jdbcType=TIMESTAMP},#{topicImage,jdbcType=LONGVARCHAR}, #{topicImageThum,jdbcType=LONGVARCHAR})
+     ]]>
+  </insert>
+  
+  <delete id="delete" parameterType="java.util.Map" >
+    delete from ulewo_topic <include refid="base_condition"/>
+  </delete>
+  
+  <update id="update" parameterType="com.ulewo.po.model.Topic" >
+    update ulewo_topic
+    <set >
+      <if test="topicType != null" >
+        topic_type = #{topicType,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="pCategoryId != null" >
+        p_category_id = #{pCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="lastCommentTime != null" >
+        last_comment_time = #{lastCommentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="essence != null" >
+        essence = #{essence,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where topic_id = #{topicId,jdbcType=INTEGER}
+  </update>
+  
+   <update id="updateInfoCount">
+         update ulewo_topic
+         <set>
+            <if test="addReadCount">
+                read_count = read_count+#{count}
+            </if>
+            <if test="addLikeCount">
+                like_count = like_count+#{count}
+            </if>
+            <if test="addCommentCount">
+                comment_count = comment_count+#{count}
+            </if>
+            <if test="addCollectionCount">
+                collection_count = collection_count+#{count}
+            </if>
+         </set>
+         where  topic_id = #{topicId}
+   </update>
+   
+   <!-- 查询活跃用户 -->
+   <select id="selectActiveUsers" resultMap="base_result_map">
+   		select count(1) topicCount,user_id,max(user_name) user_name,max(user_icon) user_icon
+   		from ulewo_topic group by user_id order by topicCount desc limit 0,20
+   </select>
+   
+   <delete id="deleteBatch">
+        delete from ulewo_topic where topic_id in <foreach collection="ids" item="item" separator="," open="(" close=")"> #{item} </foreach>
+   </delete>
+</mapper>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ulewo.mapper.BlogMapper" >
+  <resultMap id="BaseResultMap" type="com.ulewo.po.model.Blog" >
+    <id column="blog_id" property="blogId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_icon" property="userIcon" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="name" property="categoryName" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="read_count" property="readCount" jdbcType="INTEGER" />
+    <result column="comment_count" property="commentCount" jdbcType="INTEGER" />
+    <result column="like_count" property="likeCount" jdbcType="INTEGER" />
+    <result column="collection_count" property="collectionCount" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" typeHandler="com.ulewo.po.handler.BlogStatusEnumHandler"/>
+  </resultMap>
+  <sql id="base_condition" >
+ 	 <where>
+ 	      <if test="null!=blogId" >
+                and blog_id = #{blogId,jdbcType=VARCHAR}
+          </if>
+          <if test="null!=userId" >
+                and b.user_id = #{userId,jdbcType=INTEGER}
+          </if>
+          <if test="null!=categoryId and 0!=categoryId" >
+                and  b.category_id = #{categoryId,jdbcType=VARCHAR}
+          </if>
+          <if test="null!=title and ''!=title" >
+                and title like #{title}
+          </if>
+          <if test="null!=status" >
+                and status = #{status.type,jdbcType=INTEGER}
+          </if>
+          <if test="null!=startTime and ''!=startTime">
+             <![CDATA[
+                and create_time >='${startTime} 00:00:00'
+             ]]>
+          </if>
+          <if test="null!=endTime and ''!=endTime">
+              <![CDATA[
+                and create_time <= '${endTime} 23:59:59'
+              ]]>
+          </if>
+        <if test="userName!=null and ''!=userName">
+                and user_name like '%${userName}%'
+        </if>
+ 	 </where>
+  </sql>
+  <sql id="base_column_list" >
+    blog_id,b.user_id,user_name,user_icon,b.category_id,name,title,summary,read_count,comment_count,like_count,collection_count,create_time,status
+  </sql>
+ 
+  <select id="selectList" resultMap="BaseResultMap">
+      select <include refid="base_column_list"/> 
+      <if test="showContent">,content</if>
+      from ulewo_blog b left join ulewo_blog_category c on c.category_id=b.category_id <include refid="base_condition"/>
+       <if test="orderBy!=null">
+           order by ${orderBy.orderBy}
+       </if>
+       <if test="page!=null">
+            limit #{page.start},#{page.end}
+       </if>
+  </select>
+  
+  <select id="selectCount" resultType="java.lang.Integer">
+      select count(1) from ulewo_blog b <include refid="base_condition"/>
+  </select>
+  
+  <insert id="insert" parameterType="com.ulewo.po.model.Blog" >
+  	<selectKey keyProperty="blogId" resultType="int" order="AFTER">
+      	SELECT LAST_INSERT_ID()
+    </selectKey>
+    <![CDATA[
+	    insert into ulewo_blog (user_id,user_name,user_icon,category_id,title,create_time,summary,content,blog_image,blog_image_thum,status)
+	    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userIcon,jdbcType=VARCHAR},#{categoryId,jdbcType=INTEGER}, 
+	      #{title,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{summary,jdbcType=LONGVARCHAR}, 
+	      #{content,jdbcType=LONGVARCHAR}, #{blogImage,jdbcType=LONGVARCHAR}, #{blogImageThum,jdbcType=LONGVARCHAR},#{status.type,jdbcType=INTEGER})
+        ]]>
+  </insert>
+  
+ <update id="update" parameterType="com.ulewo.po.model.Blog" >
+    update ulewo_blog
+    <set >
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+       <if test="blogImage != null" >
+        blog_image = #{blogImage,jdbcType=LONGVARCHAR},
+      </if>
+       <if test="blogImageThum != null" >
+        blog_image_thum = #{blogImageThum,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status.type,jdbcType=INTEGER},
+      </if>
+    </set>
+   where blog_id = #{blogId,jdbcType=INTEGER} and user_id =  #{userId,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateInfoCount">
+         update ulewo_blog
+         <set>
+            <if test="addReadCount">
+                read_count = read_count+#{count}
+            </if>
+            <if test="addLikeCount">
+                like_count = like_count+#{count}
+            </if>
+            <if test="addCommentCount">
+                comment_count = comment_count+#{count}
+            </if>
+            <if test="addCollectionCount">
+                collection_count = collection_count+#{count}
+            </if>
+         </set>
+        where  blog_id = #{topicId}
+   </update>
+   
+  <delete id="delete">
+      delete from ulewo_blog where blog_id = #{blogId,jdbcType=VARCHAR} and user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  
+  <delete id="deleteBatch">
+        delete from ulewo_blog where blog_id in <foreach collection="ids" item="item" separator="," open="(" close=")"> #{item} </foreach>
+  </delete>
+</mapper>

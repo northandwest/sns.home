@@ -1,0 +1,56 @@
+/*****分类*******/
+.left{width:250px;float: left}
+.categories{background: #F3F4F3}
+a.post-btn{display: block;text-align: center;padding:15px 0px 15px 0px;}
+a.post-btn span{font-size: 22px;vertical-align: middle;font-weight: bold;}
+.categories{background: #F3F4F3}
+.categories a.all-knowledge{padding: 15px;display: block;font-size: 16px;margin-top: 15px;}
+.categories ul li{list-style: none;border-top: 1px solid #fff}
+.categories ul li:hover{background:#ECEEEE}
+.categories ul li a{display: block;padding: 15px 0px 5px 15px;font-size: 15px;color: #326B99}
+.categories ul li ul li{float: left;border: none;}
+.categories ul li ul{padding:0px 0px 10px 5px;}
+.categories ul li ul li a{display: inline-block;color: #AAABAA;padding: 5px 10px;font-size: 13px;}
+.categories ul li ul li a:hover,.categories ul li ul li a.active{color: #326B99}
+
+.right{width:820px;float: right;background: #F3F4F3;padding: 10px;}
+.right-main{background:#fff;padding: 15px;}
+.topic-item-list{background: #fff}
+.topic-item-list .pager{height: 40px;}
+.topic-item-list ul.pagination{float: right;}
+.topic-list-con .cate-tag a{display: inline-block;color: #5f5f5f;text-decoration: none;text-align: center;padding: 5px 20px;font-size: 14px}
+.topic-list-con .cate-tag a.active,.topic-list-con .cate-tag a:hover{background: #fff;color: #336a9a}
+
+.topic-item-list .topic-item {padding: 10px;border-bottom: 1px dashed #D5D5D5;margin:10px;word-wrap : break-word ;}
+.topic-item-list .topic-item .topic-item-title a.title,.topic-title{color:#336a9a;font-size: 16px;text-decoration: none;}
+.topic-item-list .topic-item .topic-item-title span.time{color: #aaaaaa;font-size: 12px;margin-left: 20px;}
+.topic-item-list .topic-item .topic-item-title a.topic-cate-tag{color: #aaaaaa;font-size: 12px;background: #ebedef;text-decoration: none;display: inline-block;padding:3px 10px;margin-left: 10px;}
+.topic-item-list .topic-item .topic-item-summary{font-size: 12px;color: #5f5f5f;margin-top: 10px;}
+.topic-item-list .topic-item .topic-item-images{margin: 10px 10px 10px 0px;}
+.topic-count-info{margin-top: 10px;}
+.topic-count-info a{font-size: 12px;text-decoration: none;}
+.topic-count-info span.count{display: inline-block;margin-left: 10px;color: #5f5f5f;}
+.topic-count-info span{font-size: 12px;}
+
+.topic-info-con{border-bottom: 1px solid #CCCCCC;padding-bottom: 15px;}
+
+form.u-form .item-tit {width: 100px;}
+form.u-form .item-input input.title-input{width:750px;}
+form.u-form .vote-input input.title-input{width:400px;}
+/******上传*******/
+.webuploader-pick{padding:4px 5px;}
+.file_upload{height: 40px;}
+#filePicker{display: inline-block;}
+#file-list{padding: 5px;}
+#loading-upload{display: inline-block;width: 50px;display: none;}
+.file-uploader{display: inline-block;float: left;}
+.file-info{float: left;margin-top:8px;}
+
+.like-users {margin-top: 10px;}
+.like-users a{display: inline-block;margin-right:5px;}
+/******附件******/
+.attachment-title{padding: 13px 10px 12px 10px;color: #fff;font-size:18px;background: #4590CE;float: left;width: 50px;text-align: center;}
+.attachment-info{border: 1px solid #CCCDCC;margin-left: 50px;padding: 10px}
+.attachment-info a.btn{padding: 5px 10px;}
+.attachment-info{color: #5f5f5f}
+.attachment-info span.filename{color: #336A9A;padding-left: 20px;}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ulewo.mapper.TopicVoteMapper" >
+  <resultMap id="BaseResultMap" type="com.ulewo.po.model.TopicVote" >
+    <id column="topic_id" property="topicId" jdbcType="INTEGER" />
+    <id column="vote_id" property="voteId" jdbcType="INTEGER" />
+    <id column="vote_type" property="voteType" jdbcType="INTEGER" typeHandler="com.ulewo.po.handler.VoteTypeHandler"/>
+    <result column="end_date" property="endDate" jdbcType="TIMESTAMP" />
+    <collection column="vote_id" property="dtlList" ofType="com.ulewo.po.model.TopicVoteDtl" select="com.ulewo.mapper.TopicVoteDtlMapper.selectList"/>
+  </resultMap>
+  <sql id="base_column_list" >
+    topic_id, vote_id,vote_type,end_date
+  </sql>
+  
+  <insert id="insert" parameterType="com.ulewo.po.model.TopicVote" >
+  	<selectKey keyProperty="voteId" resultType="int" order="AFTER">
+      	SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ulewo_topic_vote (topic_id,vote_type,end_date)
+    values (#{topicId,jdbcType=INTEGER}, #{voteType.type,jdbcType=INTEGER}, #{endDate,jdbcType=DATE})
+  </insert>
+  
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from ulewo_topic_vote <include refid="base_column_list"/>
+  </delete>
+  
+  <select id="selectVoteByTopicId" resultMap="BaseResultMap">
+    select <include refid="base_column_list"/> from ulewo_topic_vote where topic_id = #{topicId}
+  </select>
+  
+</mapper>

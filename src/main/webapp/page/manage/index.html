@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<#include "../include/common.html">
+<script language="javascript" type="text/javascript" src="${absolutePath}/resource/datepicker/WdatePicker.js"></script>
+<link rel="stylesheet" href="${absolutePath}/resource/css/manager.public.css"/>
+<script src="${absolutePath}/resource/js/echarts-all.js"></script>
+<script src="${absolutePath}/resource/js/manage.index.js"></script>
+<title>管理后台首页</title>
+</head>
+<body>
+<#include "top.html">
+<div class="main">
+	<#include "left.html">
+	<div class="main-right">
+		<div class="navigation"><span>首页</span>&nbsp;&gt;&nbsp;<span>统计信息</span></div>
+		<div id="chart-list">
+			<div class="chart"></div>
+			<div class="chart"></div>
+			<div class="chart"></div>
+			<div class="chart"></div>
+			<div class="chart"></div>
+			<div class="chart"></div>
+			<div class="chart"></div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

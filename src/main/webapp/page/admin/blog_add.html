@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"></meta>
+<#include "../include/common.html">
+<script type="text/javascript" src="${absolutePath}/resource/ueditor1_4_3/ueditor.config.js"></script>
+<script type="text/javascript" src="${absolutePath}/resource/ueditor1_4_3/ueditor.all.js"></script>
+<script type="text/javascript" charset="utf-8" src="${absolutePath}/resource/ueditor1_4_3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="${absolutePath}/resource/ueditor1_4_3/myActionUrl.js"></script>
+<script type="text/javascript" src="${absolutePath}/resource/webuploader/webuploader.min.js?version=3.1"></script>
+<link rel="stylesheet" type="text/css" href="${absolutePath}/resource/webuploader/webuploader.css?version=3.1"/>
+<link rel="stylesheet" href="${absolutePath}/resource/css/admin.blog.css"/>
+<title>编辑博客</title>
+</head>
+<body>
+<#include "top.html">
+<div class="main">
+	<#include "left.html">
+	<div class="main-right">
+		<div class="navigation"><span>博客管理</span>&nbsp;&gt;&nbsp;<span>发表博客</span></div>
+		<form class="u-form" autocomplete="off" id="post-form">
+		<input type="hidden" id="richContent" name="richContent"/>
+		<input type="hidden"  name="blogId" value="${(blog.blogId)!''}" id="blog-id"/>
+			<div class="form-item">
+				<div class="item-tit"><em>*</em>标题：</div>
+				<div class="item-input"><input maxlength="150" value="${(blog.title)!''}" class="title-input" type="text" name="title"  checkData="{rq:true,msg:'请输入标题'}" placeholder="请输入标题"></div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit"><em>*</em>分类：</div>
+				<div class="item-input">
+				    <span>
+					    <select name="categoryId">
+	                        <option value="0">全部分类</option>
+	                        <#list categories as item>
+	                            <option value="${item.categoryId}" <#if blog??&&item.categoryId==blog.categoryId>selected="selected"</#if>>${item.name}</option>
+	                        </#list>
+	                    </select>
+				    </span>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				 <div class="item-tit"><em>*</em>内容：</div>
+				 <div class="item-input">
+					<script id="content" type="text/plain">
+                       ${(blog.content)!''}
+                    </script>
+    			</div>
+    			<div class="clear"></div>
+			</div>
+			<input type="hidden" name="attachment_id" value="${(blog.file.attachmentId)!''}"/>
+			<input type="hidden" name="fileName" id="attached_file_name" value="${(blog.file.fileName)!''}"/>
+			<input type="hidden" name="fileUrl" id="attached_file" value="${(blog.file.fileUrl)!''}"/>
+			
+			<div class="form-item">
+				 <div class="item-tit">上传附件：</div>
+				 <div class="item-input">
+				 		<div class="file_upload" id="file_upload">
+							<div class="file-uploader">
+								<div id="filePicker">上传附件</div>
+								<div id="loading-upload"><img src="${absolutePath}/resource/images/loading.gif" noLazyload="true"></div>
+							</div>
+							<div class="file-info"><span class="info">大小不能超过2M，只能是.rar、.zip文件</span></div>
+							<div class="clear"></div>
+						</div>
+						<div id="file-list">
+							
+						</div>
+						<div class="file_upload_mark form-input-mark"><span>下载附件所需积分：</span><span><input type="text" checkData="{number:true,msg:'积分只能是数字'}" maxlength="5" name="downloadMark" id="mark" value="0"></span><a href="${absolutePath}/set_mark" target="_blank">为什么要设置积分?</a></div>
+    			</div>
+    			<div class="clear"></div>
+			</div>
+			<div class="form-item">
+				<div class="item-tit"></div>
+				<div class="item-input"><a href="javascript:void(0)" id="post-btn" class="btn">&nbsp;&nbsp;发表主题&nbsp;&nbsp;</a></div>
+				<div class="clear"></div>
+			</div>
+		</form>
+	</div>
+</div>
+<script src="${absolutePath}/resource/js/admin.blog.edit.js"></script>
+</body>
+</html>
