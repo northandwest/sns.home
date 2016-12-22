@@ -13,5 +13,5 @@
 
 	<north:application id="sns_home" key="3dff4ad316773jhfgf" />
 	<north:registry id="registrycenter" type="westrpc" address="127.0.0.1" />
-	<north:consumer id="userRpcService" timeout="3000" retries="5" url="192.168.1.110" alias="no" interface="com.bucuoa.ucenter.api.UserRpcService" version="1.0" check="false" />
+	<north:consumer id="userRpcService" timeout="3000" retries="5" url="127.0.0.1:14527" alias="no" interface="com.bucuoa.ucenter.api.UserRpcService" version="1.0" check="false" />
 </beans>
