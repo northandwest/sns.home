@@ -10,10 +10,7 @@
 package com.ulewo.service.impl;
 
 import java.io.File;
-import java.util.Date;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -29,9 +26,9 @@ import com.ulewo.po.config.ConfigInfo;
 import com.ulewo.po.enums.MessageType;
 import com.ulewo.po.enums.TextLengthEnum;
 import com.ulewo.po.model.MessageParams;
+import com.ulewo.po.model.UserFriend;
 //import com.ulewo.po.model.User;
 import com.ulewo.po.query.UserQuery;
-import com.ulewo.po.vo.AjaxResponse;
 import com.ulewo.po.vo.PaginationResult;
 import com.ulewo.service.MessageService;
 import com.ulewo.service.UserFriendService;
@@ -39,9 +36,6 @@ import com.ulewo.service.UserService;
 import com.ulewo.service.rpc.UserRpcServerServiceImpl;
 import com.ulewo.utils.Constants;
 import com.ulewo.utils.FileUtils;
-import com.ulewo.utils.HttpUtil;
-import com.ulewo.utils.JacksonMapper;
-import com.ulewo.utils.QueryString;
 import com.ulewo.utils.ServerUtils;
 import com.ulewo.utils.StringTools;
 
@@ -197,7 +191,36 @@ public class UserServiceImpl implements UserService {
 		}
 		return randomCode.toString();
 	}*/
+	
+	public boolean isFriend(Integer uid,Integer friendId)
+	{
+		int findFocusCount = userFriendService.findFocusCount(uid, friendId);
+		
+		if(findFocusCount > 0)
+		{
+			return true;
+		}
+		
+		return false;
+	}
 
+
+	public Integer myFriendCount(Integer uid)
+	{
+		int findFansCount = userFriendService.findFansCount(uid);
+		
+		return findFansCount;
+	
+	}
+	
+	public Integer focusMeCount(Integer uid)
+	{
+		int findFocusCount = userFriendService.findFocusCount(uid);
+		
+		return findFocusCount;
+	}
+
+	
 	public UlewoUser findUserByUserName(String userName) {
 //		String jsonAsString = HttpUtil.sendGet("http://ucenter.bucuoa.com/api/loadu/"+userName);
 ////		String jsonAsString = HttpUtil.sendGet("http://192.168.1.110:8070/api/loadu/"+userName);

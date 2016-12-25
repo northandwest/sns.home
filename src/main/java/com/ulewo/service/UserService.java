@@ -30,6 +30,12 @@ public interface UserService {
 	 * @since JDK 1.7
 	 */
 //	public void restister(UlewoUser user) throws BusinessException;
+	
+	boolean isFriend(Integer uid,Integer friendId);
+
+	Integer myFriendCount(Integer uid);
+	
+	Integer focusMeCount(Integer uid);
 
 	/**
 	 * 

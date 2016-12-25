@@ -9,7 +9,6 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.Map;
 
-import sun.util.logging.resources.logging;
 
 /**
  * @author Administrator

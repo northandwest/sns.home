@@ -90,6 +90,20 @@ public class UserHomeController extends BaseController {
 		ModelAndView view = new ModelAndView("/page/user/home");
 		try {
 			UlewoUser user = userService.findUserByUserId(userId.toString());
+			
+			Integer friendId = super.getUserId(session);
+			boolean isFriend = false;
+			if(friendId != null){
+				isFriend = userService.isFriend(userId, friendId);
+			}
+			user.setHaveFocus(isFriend);
+			
+			Integer myFriendCount = userService.myFriendCount(userId);
+			
+			Integer focusMeCount = userService.focusMeCount(userId);
+			
+			view.addObject("myFriendCount", myFriendCount);
+			view.addObject("focusMeCount", focusMeCount);
 			view.addObject("user", user);
 		} catch (Exception e) {
 			logger.error("获取用户信息失败：", e);
