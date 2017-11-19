@@ -40,8 +40,8 @@ import com.ulewo.utils.Constants;
 import com.ulewo.utils.ServerUtils;
 import com.ulewo.utils.StringTools;
 
-import bucuoa.upload.sftp.SFTPConstants;
-import bucuoa.upload.sftp.SFTPUtils;
+//import bucuoa.upload.sftp.SFTPConstants;
+//import bucuoa.upload.sftp.SFTPUtils;
 
 @Controller
 @RequestMapping("/admin")
@@ -152,15 +152,15 @@ public class AdminUserController extends BaseController {
 			Map<String, String> sftpDetails = new HashMap<String, String>();
 			// 设置主机ip，端口，用户名，密码
 			
-			sftpDetails.put(SFTPConstants.SFTP_REQ_HOST, configInfo.getSshdUrl());
-			sftpDetails.put(SFTPConstants.SFTP_REQ_USERNAME, configInfo.getSshdUser());
-			sftpDetails.put(SFTPConstants.SFTP_REQ_PASSWORD, configInfo.getSshdPassword());
-			sftpDetails.put(SFTPConstants.SFTP_REQ_PORT, configInfo.getSshdPort());
-			
-//			String _sourceroot = "D:/logs/abcd1.txt";
-			String _targetroot = "/opt/webroot/static.bucuoa.com/upload/avatars/"+userIconName;
-			
-			SFTPUtils.upload(pathname, _targetroot, sftpDetails);
+//			sftpDetails.put(SFTPConstants.SFTP_REQ_HOST, configInfo.getSshdUrl());
+//			sftpDetails.put(SFTPConstants.SFTP_REQ_USERNAME, configInfo.getSshdUser());
+//			sftpDetails.put(SFTPConstants.SFTP_REQ_PASSWORD, configInfo.getSshdPassword());
+//			sftpDetails.put(SFTPConstants.SFTP_REQ_PORT, configInfo.getSshdPort());
+//			
+////			String _sourceroot = "D:/logs/abcd1.txt";
+//			String _targetroot = "/opt/webroot/static.bucuoa.com/upload/avatars/"+userIconName;
+//			
+//			SFTPUtils.upload(pathname, _targetroot, sftpDetails);
 			
 			return result;
 		} catch (Exception e) {

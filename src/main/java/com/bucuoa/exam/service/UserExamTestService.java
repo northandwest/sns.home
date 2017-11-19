@@ -30,7 +30,7 @@ public class UserExamTestService extends SingleBaseService<UserExamTest, Long> {
 		return (value == null) ? "" : value.trim();
 	}
 
-	public List<Map<String, String>> queryListMap(String sql) {
+	public List<Map<String, Object>> queryListMap(String sql) {
 		return getDao().queryListMap(sql);
 	}
 
